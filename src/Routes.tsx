@@ -1,20 +1,20 @@
-import React from "react";
-import Aktivity from "./Pages/Aktivity";
-import Galerie from "./Pages/Galerie";
-import Home from "./Pages/Home";
-import NabidkaJidel from "./Pages/NabidkaJidel";
-import Onas from "./Pages/Onas";
-import Ubytovani from "./Pages/Ubytovani";
-import Navbar from "./Components/Navbar/Navbar";
-import { Outlet } from "react-router";
-import { createBrowserRouter } from "react-router-dom";
+import React from "react"
+import Aktivity from "./Pages/Aktivity/Aktivity"
+import Galerie from "./Pages/Galerie/Galerie"
+import Home from "./Pages/Home/Home"
+import NabidkaJidel from "./Pages/NabidkaJidel/NabidkaJidel"
+import Onas from "./Pages/Onas/Onas"
+import Ubytovani from "./Pages/Ubytovani/Ubytovani"
+import Navbar from "./Components/Navbar/Navbar"
+import { Outlet } from "react-router"
+import { createBrowserRouter } from "react-router-dom"
 
 const AppLayout = () => (
   <>
     <Navbar />
     <Outlet />
   </>
-);
+)
 
 const Routes = createBrowserRouter([
   {
@@ -46,6 +46,6 @@ const Routes = createBrowserRouter([
       },
     ],
   },
-]);
+])
 
-export default Routes;
+export default Routes

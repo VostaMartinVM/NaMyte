@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  height: 100vh;
+  background-color: #edc7b7;
+  min-width: 20%;
+}
+
+.top-section {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  padding: 20px;
+}
+
+.nav-menu-items {
+  list-style: none;
+  padding: 0 20px;
+}
+
+#nav-link {
+  padding: 10px 0;
+}
+
+.menu-text {
+  font-weight: 500;
+  font-size: 36px;
+}
+
+.menu-text:hover {
+  color: rgb(0, 36, 153);
+  transition: all 0.2s;
+}
+
+.active-link {
+  .menu-text {
+    color: rgb(0, 36, 153);
+    font-weight: 700;
+  }
+}

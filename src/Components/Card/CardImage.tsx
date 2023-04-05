@@ -1,4 +1,4 @@
-export type HomeImages = {
+export type CardImage = {
   url: string
   title: string
 }

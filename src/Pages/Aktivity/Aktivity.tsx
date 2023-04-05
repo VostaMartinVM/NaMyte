@@ -1,11 +1,16 @@
-import React, { FC } from "react";
+import React, { FC } from "react"
+import Card from "../../Components/Card/Card"
 
 const Aktivity: FC = () => {
-  return (
-    <div className="page">
-      <h1>Aktivity</h1>
-    </div>
-  );
-};
+  const image = { url: "../images/image-1.jpg", title: "beach" }
+  const title = "karta lol"
+  const text = "ja nevim uz"
 
-export default Aktivity;
+  return (
+    <div className='page'>
+      <Card title={title} imageUrl={image} text={text} />
+    </div>
+  )
+}
+
+export default Aktivity

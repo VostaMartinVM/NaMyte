@@ -4,16 +4,15 @@ import "./Home.scss"
 
 const Home: FC = () => {
   const slides = [
-    { url: "../images/image-1.jpg", title: "beach" },
-    { url: "../images/image-2.jpg", title: "boat" },
-    { url: "../images/image-3.jpg", title: "forest" },
-    { url: "../images/image-4.jpg", title: "city" },
-    { url: "../images/image-5.jpg", title: "italy" },
+    { url: "../images/image-1.jpg", title: "beach", id: 1 },
+    { url: "../images/image-2.jpg", title: "boat", id: 2 },
+    { url: "../images/image-3.jpg", title: "forest", id: 3 },
+    { url: "../images/image-4.jpg", title: "city", id: 4 },
+    { url: "../images/image-5.jpg", title: "italy", id: 5 },
   ]
 
   return (
-    <div>
-      <h1>Home</h1>
+    <div className='home'>
       <div className='containerStyles'>
         <ImageSlider images={slides} />
       </div>

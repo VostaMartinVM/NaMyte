@@ -27,7 +27,7 @@ const ImageSlider: FC<props> = ({ images }) => {
 
   return (
     <div className='slideStyles'>
-      <div>
+      <div className='arrowContainer'>
         <div onClick={goToPrevious} className='leftArrowStyles'>
           ❰
         </div>
@@ -39,7 +39,7 @@ const ImageSlider: FC<props> = ({ images }) => {
       <div className='dotContainerStyle'>
         {images.map((slide, slideIndex) => (
           <div
-            className='dotStyle'
+            className={currentIndex === slideIndex ? "activeDot" : "dotStyle"}
             key={slideIndex}
             onClick={() => {
               goToSlide(slideIndex)

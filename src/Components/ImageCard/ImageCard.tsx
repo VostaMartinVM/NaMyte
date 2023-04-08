@@ -1,6 +1,6 @@
 import React, { FC } from "react"
 import { Image } from "./Image"
-import "./Card.scss"
+import "./ImageCard.scss"
 
 type props = {
   imageUrl: Image
@@ -8,16 +8,11 @@ type props = {
 }
 
 const ImageCard: FC<props> = ({ imageUrl, text }) => {
-  return (
-    <div className='card-container'>
-      <div className='image-container'>
-        <img src={imageUrl.url} alt={imageUrl.url}></img>
-      </div>
-      <div className='card-content'>
-        <div className='card-body'>{text}</div>
-      </div>
-    </div>
-  )
+  const slideStylesWidthBackground = {
+    backgroundImage: `url(${imageUrl.url})`,
+  }
+
+  return <div className='imagecard-container' style={slideStylesWidthBackground}></div>
 }
 
 export default ImageCard

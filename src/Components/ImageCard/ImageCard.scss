@@ -1,0 +1,12 @@
+.imagecard-container {
+  width: 300px;
+  height: 200px;
+  overflow: hidden;
+  box-shadow: 0px 0px 15px -5px;
+  transition: 0.2s;
+  animation: ease-in;
+  border-radius: 30px;
+  border-width: 1px;
+  border-color: black;
+  background-size: cover;
+}

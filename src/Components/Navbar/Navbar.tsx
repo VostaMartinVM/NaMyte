@@ -11,14 +11,16 @@ const Navbar: FC = () => {
       <div className='container'>
         <div className='navbar'>
           <div className='top-section'>
-            <h1>Le logo</h1>
+            <Link to='/'>
+              <span className='menu-text'>Home</span>
+            </Link>
           </div>
           <ul className='nav-menu-items'>
             {SidebarData.map((item, index) => {
               return (
                 <li
                   key={index}
-                  className={location.pathname === item.path ? "active-link" : "nav-link"}
+                  className={location.pathname === item.path ? "active-link nav-link" : "nav-link"}
                 >
                   <Link to={item.path}>
                     <span className='menu-text'>{item.title}</span>

@@ -16,7 +16,9 @@ const TopNavbar: FC<props> = ({ menuItems }) => {
         {menuItems.map((item, index) => {
           return (
             <div
-              className={location.pathname === item.path ? "active-menu-item" : "menu-item"}
+              className={
+                location.pathname === item.path ? "active-menu-item menu-item" : "menu-item"
+              }
               key={index}
             >
               <Link to={item.path}>

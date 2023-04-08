@@ -1,14 +1,14 @@
 export const UbytovaniData = [
   {
-    title: "JednoluzkovyPokoj",
+    title: "Jednoluzko",
     path: "/Ubytovani/JednoluzkovyPokoj",
   },
   {
-    title: "DvouluzkovyPokoj",
+    title: "Dvouluzko",
     path: "/Ubytovani/DvouluzkovyPokoj",
   },
   {
-    title: "TriluzkovyPokoj",
+    title: "Triluzko",
     path: "/Ubytovani/TriluzkovyPokoj",
   },
 ]

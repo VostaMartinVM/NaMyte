@@ -1,22 +1,35 @@
 .topbar-container {
   display: flex;
-  height: 200px;
+  height: 150px;
   width: 100%;
   padding: 20px;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  background-color: #edc7b7;
+}
+
+.menu-item {
+  padding: 0 20px;
+  a {
+    display: flex;
+    padding: 0 20px;
+    justify-content: center;
+    align-items: center;
+  }
+  .menu-text {
+    color: aqua;
+    text-align: center;
+  }
 }
 
 .active-menu-item {
   .menu-text {
-    color: yellow;
-    background-color: aqua;
+    color: rgb(0, 36, 153);
+    font-weight: 700;
   }
 }
 
-.menu-item {
-  .menu-text {
-    color: aqua;
-    background-color: black;
-  }
+.menu-text:hover {
+  color: rgb(0, 36, 153);
+  transition: all 0.2s;
 }

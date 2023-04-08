@@ -1,11 +1,15 @@
-import React, { FC } from "react";
+import { FC } from "react"
+import { Outlet } from "react-router-dom"
+import TopNavbar from "../../Components/TopNavbar/TopNavbar"
+import { UbytovaniData } from "./UbytovaniData"
 
 const Ubytovani: FC = () => {
   return (
-    <div className="page">
-      <h1>Ubytovani</h1>
+    <div className='ubytovani'>
+      <TopNavbar menuItems={UbytovaniData}></TopNavbar>
+      <Outlet />
     </div>
-  );
+  )
 }
 
-export default Ubytovani;
+export default Ubytovani

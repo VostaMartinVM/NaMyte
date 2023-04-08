@@ -1,10 +1,15 @@
-import React, { FC } from "react";
+import { FC } from "react"
+import { Outlet, RouterProvider } from "react-router-dom"
+import TopNavbar from "../../Components/TopNavbar/TopNavbar"
+import { NabidkaJidelData } from "./NabidkaJidelData"
 
 const NabidkaJidel: FC = () => {
   return (
-    <div className="page">
-      <h1>Nabidka jidel</h1>
+    <div className='page'>
+      <TopNavbar menuItems={NabidkaJidelData}></TopNavbar>
+
+      <Outlet />
     </div>
-  );
+  )
 }
-export default NabidkaJidel;
+export default NabidkaJidel

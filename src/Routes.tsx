@@ -1,13 +1,18 @@
-import React from "react"
+import { createBrowserRouter, createRoutesFromElements, Outlet, Route } from "react-router-dom"
+import "./Styles/styles.scss"
 import Aktivity from "./Pages/Aktivity/Aktivity"
 import Galerie from "./Pages/Galerie/Galerie"
 import Home from "./Pages/Home/Home"
 import NabidkaJidel from "./Pages/NabidkaJidel/NabidkaJidel"
+import DenniMenu from "./Pages/NabidkaJidel/DenniMenu"
+import VikendoveMenu from "./Pages/NabidkaJidel/VikendoveMenu"
+import JidelniListek from "./Pages/NabidkaJidel/JidelniListek"
 import Onas from "./Pages/Onas/Onas"
 import Ubytovani from "./Pages/Ubytovani/Ubytovani"
+import JednoluzkovyPokoj from "./Pages/Ubytovani/JednoluzkovyPokoj"
+import DvouluzkovyPokoj from "./Pages/Ubytovani/DvouluzkovyPokoj"
+import TriluzkovyPokoj from "./Pages/Ubytovani/TriluzkovyPokoj"
 import Navbar from "./Components/Navbar/Navbar"
-import { Outlet } from "react-router"
-import { createBrowserRouter } from "react-router-dom"
 
 const AppLayout = () => (
   <>
@@ -16,36 +21,25 @@ const AppLayout = () => (
   </>
 )
 
-const Routes = createBrowserRouter([
-  {
-    element: <AppLayout />,
-    children: [
-      {
-        path: "/",
-        element: <Home />,
-      },
-      {
-        path: "NabidkaJidel",
-        element: <NabidkaJidel />,
-      },
-      {
-        path: "Ubytovani",
-        element: <Ubytovani />,
-      },
-      {
-        path: "Galerie",
-        element: <Galerie />,
-      },
-      {
-        path: "Aktivity",
-        element: <Aktivity />,
-      },
-      {
-        path: "Onas",
-        element: <Onas />,
-      },
-    ],
-  },
-])
+const Routes = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path='' element={<AppLayout />}>
+      <Route path='/' element={<Home />} />
+      <Route path='NabidkaJidel' element={<NabidkaJidel />}>
+        <Route path='DenniMenu' element={<DenniMenu />} />
+        <Route path='VikendoveMenu' element={<VikendoveMenu />} />
+        <Route path='JidelniListek' element={<JidelniListek />} />
+      </Route>
+      <Route path='Ubytovani' element={<Ubytovani />}>
+        <Route path='JednoluzkovyPokoj' element={<JednoluzkovyPokoj />} />
+        <Route path='DvouluzkovyPokoj' element={<DvouluzkovyPokoj />} />
+        <Route path='TriluzkovyPokoj' element={<TriluzkovyPokoj />} />
+      </Route>
+      <Route path='Galerie' element={<Galerie />} />
+      <Route path='Aktivity' element={<Aktivity />} />
+      <Route path='Onas' element={<Onas />} />
+    </Route>,
+  ),
+)
 
 export default Routes

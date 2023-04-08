@@ -1,11 +1,7 @@
-import React, { FC } from "react";
+import React, { FC } from "react"
 
 const Onas: FC = () => {
-  return (
-    <div className="page">
-      <h1>O nas</h1>
-    </div>
-  );
+  return <div className='page'></div>
 }
 
-export default Onas;
+export default Onas

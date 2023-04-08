@@ -2,31 +2,25 @@ export const SidebarData = [
   {
     title: "Home",
     path: "/",
-    id: "nav-link",
   },
   {
     title: "Nabidka jidel",
-    path: "/NabidkaJidel",
-    id: "nav-link",
+    path: "/NabidkaJidel/DenniMenu",
   },
   {
     title: "Ubytovani",
-    path: "/Ubytovani",
-    id: "nav-link",
+    path: "/Ubytovani/JednoluzkovyPokoj",
   },
   {
     title: "Galerie",
     path: "/Galerie",
-    id: "nav-link",
   },
   {
     title: "Aktivity",
     path: "/Aktivity",
-    id: "nav-link",
   },
   {
     title: "Onas",
     path: "/Onas",
-    id: "nav-link",
   },
-];
+]

@@ -1,11 +1,7 @@
-import React, { FC } from "react";
+import React, { FC } from "react"
 
 const Galerie: FC = () => {
-  return (
-    <div className="page">
-      <h1>Galerie</h1>
-    </div>
-  );
-};
+  return <div className='page'></div>
+}
 
-export default Galerie;
+export default Galerie

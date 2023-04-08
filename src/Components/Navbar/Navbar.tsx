@@ -18,8 +18,7 @@ const Navbar: FC = () => {
               return (
                 <li
                   key={index}
-                  id={item.id}
-                  className={location.pathname === item.path ? "active-link" : ""}
+                  className={location.pathname === item.path ? "active-link" : "nav-link"}
                 >
                   <Link to={item.path}>
                     <span className='menu-text'>{item.title}</span>

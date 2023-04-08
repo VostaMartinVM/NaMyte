@@ -1,0 +1,22 @@
+.topbar-container {
+  display: flex;
+  height: 200px;
+  width: 100%;
+  padding: 20px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.active-menu-item {
+  .menu-text {
+    color: yellow;
+    background-color: aqua;
+  }
+}
+
+.menu-item {
+  .menu-text {
+    color: aqua;
+    background-color: black;
+  }
+}

@@ -1,5 +1,4 @@
 .container {
-  display: flex;
   height: 100vh;
   background-color: #edc7b7;
 }
@@ -24,11 +23,10 @@
 .menu-text {
   font-weight: 500;
   font-size: 36px;
-}
-
-.menu-text:hover {
-  color: rgb(0, 36, 153);
-  transition: all 0.2s;
+  &:hover {
+    color: rgb(0, 36, 153);
+    transition: all 0.2s;
+  }
 }
 
 .active-link {

@@ -17,15 +17,17 @@
     align-items: center;
   }
   .menu-text {
-    color: aqua;
+    color: black;
     text-align: center;
   }
 }
 
 .active-menu-item {
   .menu-text {
-    color: rgb(0, 36, 153);
+    transition: all 0.2s;
+    color: #008b8b;
     font-weight: 700;
+    font-size: 42px;
   }
 }
 

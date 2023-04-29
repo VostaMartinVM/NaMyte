@@ -1,9 +1,28 @@
-import React, { FC } from "react"
+import React, { FC, useEffect, useState } from "react"
+import { getPicturesTriluzko } from "../../firebaseApi"
+import ImageSlider from "../../Components/ImageSlider/ImageSlider"
 
 const TriluzkovyPokoj: FC = () => {
+  const [triluzkoPictures, setTriluzkoPictures] = useState<string[]>()
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetchedPictures = await getPicturesTriluzko()
+      setTriluzkoPictures(fetchedPictures)
+    }
+
+    fetchData()
+  }, [])
+
   return (
-    <div className='triluzkovyPokoj'>
-      <h1> le triluzkovy pokoj</h1>
+    <div className='rooms'>
+      <div className='containerStyles'>
+        <ImageSlider images={triluzkoPictures} styling='roomImageSlider'></ImageSlider>
+      </div>
+      <div>
+        <h1> le dvouluzkovy pokoj</h1>
+        <p></p>
+      </div>
     </div>
   )
 }

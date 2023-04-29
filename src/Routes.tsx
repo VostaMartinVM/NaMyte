@@ -12,32 +12,29 @@ import Ubytovani from "./Pages/Ubytovani/Ubytovani"
 import JednoluzkovyPokoj from "./Pages/Ubytovani/JednoluzkovyPokoj"
 import DvouluzkovyPokoj from "./Pages/Ubytovani/DvouluzkovyPokoj"
 import TriluzkovyPokoj from "./Pages/Ubytovani/TriluzkovyPokoj"
-import Navbar from "./Components/Navbar/Navbar"
-
-const AppLayout = () => (
-  <>
-    <Navbar />
-    <Outlet />
-  </>
-)
+import Admin from "./Pages/Admin/Admin"
+import App from "./App"
 
 const Routes = createBrowserRouter(
   createRoutesFromElements(
-    <Route path='' element={<AppLayout />}>
-      <Route path='/' element={<Home />} />
-      <Route path='NabidkaJidel' element={<NabidkaJidel />}>
-        <Route path='DenniMenu' element={<DenniMenu />} />
-        <Route path='VikendoveMenu' element={<VikendoveMenu />} />
-        <Route path='JidelniListek' element={<JidelniListek />} />
+    <Route path=''>
+      <Route path='Admin' element={<Admin />} />
+      <Route path='' element={<App />}>
+        <Route path='/' element={<Home />} />
+        <Route path='NabidkaJidel' element={<NabidkaJidel />}>
+          <Route path='DenniMenu' element={<DenniMenu />} />
+          <Route path='VikendoveMenu' element={<VikendoveMenu />} />
+          <Route path='JidelniListek' element={<JidelniListek />} />
+        </Route>
+        <Route path='Ubytovani' element={<Ubytovani />}>
+          <Route path='JednoluzkovyPokoj' element={<JednoluzkovyPokoj />} />
+          <Route path='DvouluzkovyPokoj' element={<DvouluzkovyPokoj />} />
+          <Route path='TriluzkovyPokoj' element={<TriluzkovyPokoj />} />
+        </Route>
+        <Route path='Galerie' element={<Galerie />} />
+        <Route path='Aktivity' element={<Aktivity />} />
+        <Route path='Onas' element={<Onas />} />
       </Route>
-      <Route path='Ubytovani' element={<Ubytovani />}>
-        <Route path='JednoluzkovyPokoj' element={<JednoluzkovyPokoj />} />
-        <Route path='DvouluzkovyPokoj' element={<DvouluzkovyPokoj />} />
-        <Route path='TriluzkovyPokoj' element={<TriluzkovyPokoj />} />
-      </Route>
-      <Route path='Galerie' element={<Galerie />} />
-      <Route path='Aktivity' element={<Aktivity />} />
-      <Route path='Onas' element={<Onas />} />
     </Route>,
   ),
 )

@@ -1,6 +1,5 @@
-import React, { FC, useState } from "react"
+import React, { FC, useEffect, useState } from "react"
 import "./ImageSlider.scss"
-import { Image } from "../ImageCard/Image"
 
 type props = {
   images?: string[]
@@ -8,7 +7,9 @@ type props = {
 }
 
 const ImageSlider: FC<props> = ({ images, styling }) => {
+  const [currentImg, setCurrentImg] = useState(images)
   const [currentIndex, setCurrentIndex] = useState(0)
+
   const goToPrevious = () => {
     const isFirstSlide = currentIndex === 0
     const newIndex = isFirstSlide && images ? images.length - 1 : currentIndex - 1
@@ -24,9 +25,13 @@ const ImageSlider: FC<props> = ({ images, styling }) => {
   const goToSlide = (slideIndex: number) => {
     setCurrentIndex(slideIndex)
   }
-  const slideStylesWidthBackground = {
-    backgroundImage: `url(${images && images[currentIndex]})`,
-  }
+  // const slideStylesWidthBackground = {
+  //   backgroundImage: `url(${images && images[currentIndex]})`,
+  // }
+
+  useEffect(() => {
+    setCurrentImg(images)
+  }, [images])
 
   return (
     <div className={styling}>
@@ -38,7 +43,10 @@ const ImageSlider: FC<props> = ({ images, styling }) => {
           ❱
         </div>
       </div>
-      <div className='sliderStyles' style={slideStylesWidthBackground}></div>
+      <div
+        className='sliderStyles'
+        style={{ backgroundImage: `url(${currentImg && currentImg[currentIndex]})` }}
+      ></div>
       <div className='dotContainerStyle'>
         {images &&
           images.map((slide, slideIndex) => (

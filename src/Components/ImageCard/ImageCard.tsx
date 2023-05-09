@@ -6,7 +6,6 @@ import ImageSlider from "../ImageSlider/ImageSlider"
 type Props = {
   id: string
   src: string
-  alt: string
   styling: string
 }
 
@@ -64,6 +63,5 @@ export default ImageCard
 ImageCard.propTypes = {
   id: PropTypes.string.isRequired,
   src: PropTypes.string.isRequired,
-  alt: PropTypes.string.isRequired,
   styling: PropTypes.string.isRequired,
 }

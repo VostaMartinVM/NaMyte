@@ -1,30 +1,38 @@
-import React, { FC } from "react"
+import React, { FC, useEffect, useState } from "react"
+import { getPicturesHomePage } from "../../firebaseApi"
+import ImageSlider from "../../Components/ImageSlider/ImageSlider"
 import ImageCard from "../../Components/ImageCard/ImageCard"
-import MyGallery from "../../Images/Images"
 
-export type Image = {
-  id: string
-  src: string
-  alt: string
-  styling: string
-}
+// export type Image = {
+//   id: string
+//   src: string
+//   alt: string
+//   styling: string
+// }
 
-type Props = {
-  images: Image[]
-}
+// type Props = {
+//   images: Image[]
+// }
 
-const Galerie: React.FC<Props> = ({ images }) => {
+const Galerie: FC = () => {
+  const [homePagePictures, setHomePagePictures] = useState<string[]>()
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetchedPictures = await getPicturesHomePage()
+      setHomePagePictures(fetchedPictures)
+    }
+
+    fetchData()
+  }, [])
+
   return (
     <div>
-      {images.map((image) => (
-        <ImageCard
-          key={image.id}
-          id={image.id}
-          src={image.src}
-          alt={image.alt}
-          styling={image.styling}
-        />
-      ))}
+      <ImageCard
+        id='1'
+        src={homePagePictures?.[0] ?? "sracka toto ? "}
+        styling='dpc idk'
+      ></ImageCard>
     </div>
   )
 }

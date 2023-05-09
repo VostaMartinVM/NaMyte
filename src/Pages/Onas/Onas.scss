@@ -1,10 +1,4 @@
-* {
-  margin: 0px;
-  padding: 0px;
-  box-sizing: border-box;
-  font-family: "Roboto", sans-serif;
-}
-h1 {
+.header {
   width: 90%;
   display: flex;
   justify-content: center;
@@ -12,4 +6,17 @@ h1 {
   flex-direction: column;
   text-align: center;
   margin: 20px auto;
+}
+.header h1 {
+  font-size: 36px;
+}
+.map {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+.sneaky {
+  font-size: 12px;
+  text-align: center;
+  margin: 10px auto;
 }

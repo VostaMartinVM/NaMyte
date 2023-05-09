@@ -1,16 +1,18 @@
 import React, { FC, useState, useEffect, useRef } from "react"
-import { Image } from "./Image"
+import PropTypes from "prop-types"
 import "./ImageCard.scss"
 import ImageSlider from "../ImageSlider/ImageSlider"
 
-type props = {
-  image: string
+type Props = {
+  id: string
+  src: string
+  alt: string
   styling: string
 }
 
-const ImageCard: FC<props> = ({ image, styling }) => {
+const ImageCard: FC<Props> = ({ id, src, styling }) => {
   const slideStylesWidthBackground = {
-    backgroundImage: `url(${image})`,
+    backgroundImage: `url(${src})`,
   }
 
   const [modal, setModal] = useState<boolean>(false)
@@ -48,7 +50,7 @@ const ImageCard: FC<props> = ({ image, styling }) => {
         <div>
           <div className='overlay'>
             <div className='modal-content' ref={modalRef}>
-              <ImageSlider images={[image]} styling={styling} />
+              <ImageSlider images={[src]} styling={styling} />
             </div>
           </div>
         </div>
@@ -58,3 +60,10 @@ const ImageCard: FC<props> = ({ image, styling }) => {
 }
 
 export default ImageCard
+
+ImageCard.propTypes = {
+  id: PropTypes.string.isRequired,
+  src: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
+  styling: PropTypes.string.isRequired,
+}

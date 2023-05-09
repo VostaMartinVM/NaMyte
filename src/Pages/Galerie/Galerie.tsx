@@ -1,13 +1,30 @@
 import React, { FC } from "react"
 import ImageCard from "../../Components/ImageCard/ImageCard"
+import MyGallery from "../../Images/Images"
 
-const Galerie: FC = () => {
-  const image = "../images/image-1.jpg"
-  const text = "imageCardSlider"
+export type Image = {
+  id: string
+  src: string
+  alt: string
+  styling: string
+}
 
+type Props = {
+  images: Image[]
+}
+
+const Galerie: React.FC<Props> = ({ images }) => {
   return (
-    <div className='page'>
-      <ImageCard image={image} styling={text}></ImageCard>
+    <div>
+      {images.map((image) => (
+        <ImageCard
+          key={image.id}
+          id={image.id}
+          src={image.src}
+          alt={image.alt}
+          styling={image.styling}
+        />
+      ))}
     </div>
   )
 }

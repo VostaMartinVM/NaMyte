@@ -1,4 +1,6 @@
-export type Image = {
-  url: string
-  title: string
+export type image = {
+  id: string
+  src: string
+  alt: string
+  styling: string
 }

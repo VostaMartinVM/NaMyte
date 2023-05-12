@@ -27,7 +27,7 @@ const Home: FC = () => {
       </div>
       <div className='text-container'>
         <div className='header'>
-          <h1>{translationData?.translated_output.header.cs}</h1>
+          <h1>{translationData ? translationData.translated_output.header.cs : "Home"}</h1>
         </div>
         <div className='text'>
           <p>{translationData?.translated_output.introduction.cs} </p>

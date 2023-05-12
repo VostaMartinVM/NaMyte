@@ -1,4 +1,4 @@
-import { createBrowserRouter, createRoutesFromElements, Outlet, Route } from "react-router-dom"
+import { createBrowserRouter, createRoutesFromElements, Route } from "react-router-dom"
 import "./Styles/styles.scss"
 import Aktivity from "./Pages/Aktivity/Aktivity"
 import Galerie from "./Pages/Galerie/Galerie"
@@ -14,11 +14,21 @@ import DvouluzkovyPokoj from "./Pages/Ubytovani/DvouluzkovyPokoj"
 import TriluzkovyPokoj from "./Pages/Ubytovani/TriluzkovyPokoj"
 import Admin from "./Pages/Admin/Admin"
 import App from "./App"
+import Login from "./Pages/Login/Login"
+import AuthRoute from "./Auth"
 
 const Routes = createBrowserRouter(
   createRoutesFromElements(
     <Route path=''>
-      <Route path='Admin' element={<Admin />} />
+      <Route path='Login' element={<Login />} />
+      <Route
+        path='Admin'
+        element={
+          <AuthRoute>
+            <Admin />
+          </AuthRoute>
+        }
+      />
       <Route path='' element={<App />}>
         <Route path='/' element={<Home />} />
         <Route path='NabidkaJidel' element={<NabidkaJidel />}>

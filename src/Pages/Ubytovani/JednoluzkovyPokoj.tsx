@@ -9,7 +9,6 @@ const JednoluzkovyPokoj: FC = () => {
     const fetchData = async () => {
       const fetchedPictures = await getPicturesJednoluzko()
       setJednoluzkoPictures(fetchedPictures)
-      console.log(fetchedPictures)
     }
 
     fetchData()

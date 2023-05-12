@@ -25,9 +25,6 @@ const ImageSlider: FC<props> = ({ images, styling }) => {
   const goToSlide = (slideIndex: number) => {
     setCurrentIndex(slideIndex)
   }
-  // const slideStylesWidthBackground = {
-  //   backgroundImage: `url(${images && images[currentIndex]})`,
-  // }
 
   useEffect(() => {
     setCurrentImg(images)
@@ -43,10 +40,9 @@ const ImageSlider: FC<props> = ({ images, styling }) => {
           ❱
         </div>
       </div>
-      <div
-        className='sliderStyles'
-        style={{ backgroundImage: `url(${currentImg && currentImg[currentIndex]})` }}
-      ></div>
+      <div className='sliderStyles'>
+        <img className='sliderImage' src={currentImg && currentImg[currentIndex]}></img>
+      </div>
       <div className='dotContainerStyle'>
         {images &&
           images.map((slide, slideIndex) => (

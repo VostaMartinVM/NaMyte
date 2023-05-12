@@ -17,10 +17,10 @@ const Navbar: FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const fetchedTranslation = await getNavbarTranslated()
+      // const fetchedTranslation = await getNavbarTranslated()
       const fetchedPictures = await getPicturesLogo()
       setLogoPictures(fetchedPictures)
-      setTranslationData(fetchedTranslation)
+      // setTranslationData(fetchedTranslation)
     }
 
     fetchData()
@@ -28,7 +28,7 @@ const Navbar: FC = () => {
 
   const SidebarData = [
     {
-      title: "NabidkaJedel",
+      title: translationData?.translated_output.header.cs,
       path: "/NabidkaJidel/DenniMenu",
     },
     {
@@ -50,37 +50,39 @@ const Navbar: FC = () => {
   ]
 
   return (
-    <>
-      <div className='container'>
-        <div className='navbar'>
-          <div className='top-section'>
-            {logoPictures && logoPictures[0] && (
-              <Link to='/'>
-                <img src={logoPictures[0]} alt='Logo' />
-              </Link>
-            )}
-          </div>
-          <ul className='nav-menu-items'>
-            {SidebarData.map((item, index) => {
-              return (
-                <li
-                  className={
-                    location.pathname === item.path || activeLink === item.path
-                      ? "active-link nav-link"
-                      : "nav-link"
-                  }
-                  key={index}
-                >
-                  <Link to={item.path} onClick={() => handleLinkClick(item.path)}>
-                    <span className='menu-text'>{item.title}</span>
-                  </Link>
-                </li>
-              )
-            })}
-          </ul>
+    <div className='containerNavbar'>
+      <div className='navbar'>
+        <div className='top-section'>
+          {logoPictures?.map((logoPicture, index) => {
+            return (
+              <>
+                <Link to='/' key={index}>
+                  <img src={logoPicture} alt='Logo' />
+                </Link>
+              </>
+            )
+          })}
         </div>
+        <ul className='nav-menu-items'>
+          {SidebarData.map((item, index) => {
+            return (
+              <li
+                className={
+                  location.pathname === item.path || activeLink === item.path
+                    ? "active-link nav-link"
+                    : "nav-link"
+                }
+                key={index}
+              >
+                <Link to={item.path} onClick={() => handleLinkClick(item.path)}>
+                  <span className='menu-text'>{item.title}</span>
+                </Link>
+              </li>
+            )
+          })}
+        </ul>
       </div>
-    </>
+    </div>
   )
 }
 

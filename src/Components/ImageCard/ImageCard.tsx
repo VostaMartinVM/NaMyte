@@ -10,10 +10,6 @@ type Props = {
 }
 
 const ImageCard: FC<Props> = ({ id, src, styling }) => {
-  const slideStylesWidthBackground = {
-    backgroundImage: `url(${src})`,
-  }
-
   const [modal, setModal] = useState<boolean>(false)
 
   const toggleModal = () => {
@@ -39,11 +35,9 @@ const ImageCard: FC<Props> = ({ id, src, styling }) => {
 
   return (
     <>
-      <div
-        className='imagecard-container'
-        style={slideStylesWidthBackground}
-        onClick={toggleModal}
-      ></div>
+      <div className='imagecard-container' onClick={toggleModal}>
+        <img className='imageCardImage' src={src}></img>
+      </div>
 
       {modal && (
         <div>

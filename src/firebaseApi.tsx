@@ -43,109 +43,73 @@ export const getUbytovaniPageMenuTranslated = async () => {
 // GET PICTURES
 
 export const getPicturesHomePage = async () => {
-  const listRef = ref(storage, "HomePage")
-  const refs = await listAll(listRef).then((res) => {
-    return res.items
-  })
-  const urls: string[] = []
-  refs.forEach(async (ref) => {
-    urls.push(await getDownloadURL(ref))
-  })
-  return urls
+  const listRef = ref(storage, "HomePage/")
+  const refs = await listAll(listRef)
+
+  const urlPromises = refs.items.map((imageRef) => getDownloadURL(imageRef))
+  return Promise.all(urlPromises)
 }
 
 export const getPicturesLogo = async () => {
-  const listRef = ref(storage, "Logo")
-  const refs = await listAll(listRef).then((res) => {
-    return res.items
-  })
-  const urls: string[] = []
-  refs.forEach(async (ref) => {
-    urls.push(await getDownloadURL(ref))
-  })
-  return urls
+  const listRef = ref(storage, "Logo/")
+  const refs = await listAll(listRef)
+
+  const urlPromises = refs.items.map((imageRef) => getDownloadURL(imageRef))
+  return Promise.all(urlPromises)
 }
 
 export const getPicturesDenniMenu = async () => {
-  const listRef = ref(storage, "DenniMenu")
-  const refs = await listAll(listRef).then((res) => {
-    return res.items
-  })
-  const urls: string[] = []
-  refs.forEach(async (ref) => {
-    urls.push(await getDownloadURL(ref))
-  })
-  return urls
+  const listRef = ref(storage, "DenniMenu/")
+  const refs = await listAll(listRef)
+
+  const urlPromises = refs.items.map((imageRef) => getDownloadURL(imageRef))
+  return Promise.all(urlPromises)
 }
 
 export const getPicturesVikendoveMenu = async () => {
-  const listRef = ref(storage, "VikendoveMenu")
-  const refs = await listAll(listRef).then((res) => {
-    return res.items
-  })
-  const urls: string[] = []
-  refs.forEach(async (ref) => {
-    urls.push(await getDownloadURL(ref))
-  })
-  return urls
+  const listRef = ref(storage, "VikendoveMenu/")
+  const refs = await listAll(listRef)
+
+  const urlPromises = refs.items.map((imageRef) => getDownloadURL(imageRef))
+  return Promise.all(urlPromises)
 }
 
 export const getPicturesJidelniListek = async () => {
-  const listRef = ref(storage, "JidelniListek")
-  const refs = await listAll(listRef).then((res) => {
-    return res.items
-  })
-  const urls: string[] = []
-  refs.forEach(async (ref) => {
-    urls.push(await getDownloadURL(ref))
-  })
-  return urls
+  const listRef = ref(storage, "JidelniListek/")
+  const refs = await listAll(listRef)
+
+  const urlPromises = refs.items.map((imageRef) => getDownloadURL(imageRef))
+  return Promise.all(urlPromises)
 }
 
 export const getPicturesJednoluzko = async () => {
-  const listRef = ref(storage, "Jednoluzko")
-  const refs = await listAll(listRef).then((res) => {
-    return res.items
-  })
-  const urls: string[] = []
-  refs.forEach(async (ref) => {
-    urls.push(await getDownloadURL(ref))
-  })
-  return urls
+  const listRef = ref(storage, "Jednoluzko/")
+  const refs = await listAll(listRef)
+
+  const urlPromises = refs.items.map((imageRef) => getDownloadURL(imageRef))
+  return Promise.all(urlPromises)
 }
 
 export const getPicturesDvouluzko = async () => {
-  const listRef = ref(storage, "Dvouluzko")
-  const refs = await listAll(listRef).then((res) => {
-    return res.items
-  })
-  const urls: string[] = []
-  refs.forEach(async (ref) => {
-    urls.push(await getDownloadURL(ref))
-  })
-  return urls
+  const listRef = ref(storage, "Dvouluzko/")
+  const refs = await listAll(listRef)
+
+  const urlPromises = refs.items.map((imageRef) => getDownloadURL(imageRef))
+  return Promise.all(urlPromises)
 }
 
 export const getPicturesTriluzko = async () => {
-  const listRef = ref(storage, "Triluzko")
-  const refs = await listAll(listRef).then((res) => {
-    return res.items
-  })
-  const urls: string[] = []
-  refs.forEach(async (ref) => {
-    urls.push(await getDownloadURL(ref))
-  })
-  return urls
+  const listRef = ref(storage, "Triluzko/")
+  const refs = await listAll(listRef)
+
+  const urlPromises = refs.items.map((imageRef) => getDownloadURL(imageRef))
+  return Promise.all(urlPromises)
 }
 
 export const getPicturesSvatby = async () => {
-  const listRef = ref(storage, "Svatby")
-  const refs = await listAll(listRef).then((res) => {
-    return res.items
-  })
-  const urls: string[] = []
-  refs.forEach(async (ref) => {
-    urls.push(await getDownloadURL(ref))
-  })
-  return urls
+  const listRef = ref(storage, "Svatby/")
+  const refs = await listAll(listRef)
+
+  const urlPromises = refs.items.map((imageRef) => getDownloadURL(imageRef))
+  return Promise.all(urlPromises)
 }

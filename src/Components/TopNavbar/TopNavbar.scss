@@ -5,7 +5,10 @@
   padding: 20px;
   justify-content: center;
   align-items: center;
-  background-color: #edc7b7;
+  background-image: url("./menu.png");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .menu-item {

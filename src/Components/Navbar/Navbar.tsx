@@ -48,8 +48,8 @@ const Navbar: FC = () => {
       path: "/NabidkaJidel/DenniMenu",
     },
     {
-      title: translationData?.translated_output.ubytovani[lg],
-      path: "/Ubytovani/JednoluzkovyPokoj",
+      title: "Ubytovani",
+      path: "/Ubytovani",
     },
     {
       title: translationData?.translated_output.galerie[lg],

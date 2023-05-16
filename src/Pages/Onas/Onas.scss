@@ -27,12 +27,15 @@
 }
 
 .header h1 {
+  padding-top: 64px;
+  padding-bottom: 64px;
   font-size: 36px;
 }
 .map {
+  padding-top: 64px;
   display: flex;
   align-items: center;
-  justify-content: left;
+  justify-content: center;
 }
 .sneaky {
   font-size: 12px;

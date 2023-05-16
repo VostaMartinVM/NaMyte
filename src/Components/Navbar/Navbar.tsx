@@ -33,7 +33,7 @@ const Navbar: FC = () => {
     },
     {
       title: "Ubytovani",
-      path: "/Ubytovani/JednoluzkovyPokoj",
+      path: "/Ubytovani",
     },
     {
       title: "Galerie",

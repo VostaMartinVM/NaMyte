@@ -1,8 +1,12 @@
 .containerNavbar {
+  display: flex;
   height: 100vh;
   background-image: url("./navbarImage.png");
   background-position: center;
   background-size: cover;
+  position: fixed;
+  overflow: hidden;
+  width: 360px;
 }
 
 .top-section {
@@ -10,22 +14,22 @@
   align-items: center;
   justify-items: center;
   padding: 20px;
+  margin-top: 30px;
 }
 
 .nav-menu-items {
   list-style: none;
   padding: 0 20px;
-  width: 360px;
 }
 
 .nav-link {
-  padding: 10px 0;
-  padding-bottom: 60px;
+  padding: 0 0 20px 10px;
 }
 
 .menu-text {
   font-weight: 500;
   font-size: 36px;
+
   &:hover {
     color: #008b8b;
     transition: all 0.2s;
@@ -36,6 +40,5 @@
   .menu-text {
     color: #008b8b;
     font-weight: 700;
-    font-size: 42px;
   }
 }

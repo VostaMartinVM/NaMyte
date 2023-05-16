@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react"
+import { FC, useEffect, useState } from "react"
 import {
   getPicturesDvouluzko,
   getPicturesHomePage,
@@ -6,16 +6,17 @@ import {
   getPicturesSvatby,
   getPicturesTriluzko,
 } from "../../firebaseApi"
-import ImageSlider from "../../Components/ImageSlider/ImageSlider"
 import ImageCard from "../../Components/ImageCard/ImageCard"
 import "./Galerie.scss"
 
+export interface Picture {
+  id: number
+  src: string
+  folder: string
+}
+
 const Galerie: FC = () => {
-  const [homePagePictures, setHomePagePictures] = useState<string[]>()
-  const [jednoluzkoPictures, setJednoluzkoPictures] = useState<string[]>()
-  const [dvouluzkoPictures, setDvouluzkoPictures] = useState<string[]>()
-  const [triluzkoPictures, setTriluzkoPictures] = useState<string[]>()
-  const [svatbyPictures, setSvatbyPictures] = useState<string[]>()
+  const [pictures, setPictures] = useState<Picture[]>([])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,11 +26,20 @@ const Galerie: FC = () => {
       const fetchedTriluzkoPictures = await getPicturesTriluzko()
       const fetchedSvatbyPictures = await getPicturesSvatby()
 
-      setHomePagePictures(fetchedHomePagePictures)
-      setJednoluzkoPictures(fetchedJednoluzkoPictures)
-      setDvouluzkoPictures(fetchedDvouluzkoPictures)
-      setTriluzkoPictures(fetchedTriluzkoPictures)
-      setSvatbyPictures(fetchedSvatbyPictures)
+      const allPictures = [
+        ...fetchedHomePagePictures.map((src) => ({ src, folder: "homePage" })),
+        ...fetchedJednoluzkoPictures.map((src) => ({ src, folder: "jednoluzko" })),
+        ...fetchedDvouluzkoPictures.map((src) => ({ src, folder: "dvouluzko" })),
+        ...fetchedTriluzkoPictures.map((src) => ({ src, folder: "triluzko" })),
+        ...fetchedSvatbyPictures.map((src) => ({ src, folder: "svatby" })),
+      ]
+
+      const picturesWithId: Picture[] = allPictures.map((picture, index) => ({
+        ...picture,
+        id: index,
+      }))
+
+      setPictures(picturesWithId)
     }
 
     fetchData()
@@ -41,56 +51,51 @@ const Galerie: FC = () => {
         <h1>Penzion</h1>
       </div>
       <div className='galeryStructure'>
-        {homePagePictures &&
-          homePagePictures.map((picture, index) => (
-            <ImageCard
-              key={`homePage-${index}`} // Provide a unique key for each card
-              id={`${index}`} // Use the index as the ID (not recommended in production code)
-              src={picture}
-              styling='dpc idk'
-            />
+        {pictures
+          .filter((picture) => picture.folder === "homePage")
+          .map((picture, index) => (
+            <ImageCard key={`homePage-${index}`} id={picture.id} pictures={pictures} />
           ))}
-      </div>
-      <div className='galerieHeader'>
-        <h1>Penzion</h1>
-      </div>
-      <div className='galeryStructure'>
-        {jednoluzkoPictures &&
-          jednoluzkoPictures.map((picture, index) => (
-            <ImageCard
-              key={`jednoluzko-${index}`}
-              id={`${index}`}
-              src={picture}
-              styling='dpc idk'
-            />
-          ))}
-      </div>
-      <div className='galerieHeader'>
-        <h1>Penzion</h1>
-      </div>
-      <div className='galeryStructure'>
-        {dvouluzkoPictures &&
-          dvouluzkoPictures.map((picture, index) => (
-            <ImageCard key={`dvouluzko-${index}`} id={`${index}`} src={picture} styling='dpc idk' />
-          ))}
-      </div>
-      <div className='galerieHeader'>
-        <h1>Penzion</h1>
-      </div>
-      <div className='galeryStructure'>
-        {triluzkoPictures &&
-          triluzkoPictures.map((picture, index) => (
-            <ImageCard key={`triluzko-${index}`} id={`${index}`} src={picture} styling='dpc idk' />
-          ))}
-      </div>
-      <div className='galerieHeader'>
-        <h1>Penzion</h1>
-      </div>
-      <div className='galeryStructure'>
-        {svatbyPictures &&
-          svatbyPictures.map((picture, index) => (
-            <ImageCard key={`svatby-${index}`} id={`${index}`} src={picture} styling='dpc idk' />
-          ))}
+        <div className='galerieHeader'>
+          <h1>Jednoluzko</h1>
+        </div>
+        <div className='galeryStructure'>
+          {pictures
+            .filter((picture) => picture.folder === "jednoluzko")
+            .map((picture, index) => (
+              <ImageCard key={`jednoluzko-${index}`} id={picture.id} pictures={pictures} />
+            ))}
+        </div>
+        <div className='galerieHeader'>
+          <h1>Dvouluzko</h1>
+        </div>
+        <div className='galeryStructure'>
+          {pictures
+            .filter((picture) => picture.folder === "dvouluzko")
+            .map((picture, index) => (
+              <ImageCard key={`dvouluzko-${index}`} id={picture.id} pictures={pictures} />
+            ))}
+        </div>
+        <div className='galerieHeader'>
+          <h1>Triluzko</h1>
+        </div>
+        <div className='galeryStructure'>
+          {pictures
+            .filter((picture) => picture.folder === "triluzko")
+            .map((picture, index) => (
+              <ImageCard key={`triluzko-${index}`} id={picture.id} pictures={pictures} />
+            ))}
+        </div>
+        <div className='galerieHeader'>
+          <h1>Svatby</h1>
+        </div>
+        <div className='galeryStructure'>
+          {pictures
+            .filter((picture) => picture.folder === "svatby")
+            .map((picture, index) => (
+              <ImageCard key={`svatby-${index}`} id={picture.id} pictures={pictures} />
+            ))}
+        </div>
       </div>
     </div>
   )

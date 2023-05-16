@@ -17,7 +17,7 @@ const DvouluzkovyPokoj: FC = () => {
   return (
     <div className='rooms'>
       <div className='containerStyles'>
-        <ImageSlider images={dvouluzkoPictures} styling='roomImageSlider'></ImageSlider>
+        <ImageSlider pictures={dvouluzkoPictures} styling='roomImageSlider'></ImageSlider>
       </div>
       <div>
         <h1> le dvouluzkovy pokoj</h1>

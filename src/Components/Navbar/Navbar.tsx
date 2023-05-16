@@ -3,6 +3,9 @@ import { Link, useLocation } from "react-router-dom"
 import "./Navbar.scss"
 import { getNavbarTranslated, getPicturesLogo } from "../../firebaseApi"
 import { DocumentData } from "@firebase/firestore"
+import { useDispatch, useSelector } from "react-redux"
+import { RootState } from "../../Redux/store"
+import { setLanguage } from "../../Redux/Slices/Languages"
 
 const Navbar: FC = () => {
   const location = useLocation()
@@ -11,16 +14,29 @@ const Navbar: FC = () => {
     setActiveLink(path)
   }
 
+  const dispatch = useDispatch()
+  const { lg } = useSelector((state: RootState) => {
+    return state.language
+  })
+
+  const english = () => {
+    dispatch(setLanguage("en"))
+  }
+
+  const cestina = () => {
+    dispatch(setLanguage("cs"))
+  }
+
   const [translationData, setTranslationData] = useState<DocumentData>()
 
   const [logoPictures, setLogoPictures] = useState<string[]>()
 
   useEffect(() => {
     const fetchData = async () => {
-      // const fetchedTranslation = await getNavbarTranslated()
+      const fetchedTranslation = await getNavbarTranslated()
       const fetchedPictures = await getPicturesLogo()
       setLogoPictures(fetchedPictures)
-      // setTranslationData(fetchedTranslation)
+      setTranslationData(fetchedTranslation)
     }
 
     fetchData()
@@ -28,23 +44,23 @@ const Navbar: FC = () => {
 
   const SidebarData = [
     {
-      title: translationData?.translated_output.header.cs,
+      title: translationData?.translated_output.nabydkaJidel[lg],
       path: "/NabidkaJidel/DenniMenu",
     },
     {
-      title: "Ubytovani",
+      title: translationData?.translated_output.ubytovani[lg],
       path: "/Ubytovani/JednoluzkovyPokoj",
     },
     {
-      title: "Galerie",
+      title: translationData?.translated_output.galerie[lg],
       path: "/Galerie",
     },
     {
-      title: "Aktivity",
+      title: translationData?.translated_output.aktivity[lg],
       path: "/Aktivity",
     },
     {
-      title: "Onas",
+      title: translationData?.translated_output.oNas[lg],
       path: "/Onas",
     },
   ]
@@ -81,6 +97,13 @@ const Navbar: FC = () => {
             )
           })}
         </ul>
+        <button className='cestina' onClick={cestina}>
+          cestina
+        </button>
+        <button className='ajina' onClick={english}>
+          ajina
+        </button>
+        <button className='nemcina'>nemcina</button>
       </div>
     </div>
   )

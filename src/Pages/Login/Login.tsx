@@ -32,15 +32,30 @@ const Login: FC = () => {
   return (
     <div className='loginContainer'>
       <h1>Prihlaste se</h1>
-      <div className='inputField'>
-        <input type='text' placeholder='Email' name='email' onChange={handleChange} />
+      <div className='inputContainer'>
+        <div className='inputField'>
+          <input
+            className='input'
+            type='text'
+            placeholder='Email'
+            name='email'
+            onChange={handleChange}
+          />
+        </div>
+        <div className='inputField'>
+          <input
+            className='input'
+            type='password'
+            placeholder='Heslo'
+            name='password'
+            onChange={handleChange}
+          />
+        </div>
+
+        <button onClick={loginFunction} className='loginButton'>
+          Prihlasit se
+        </button>
       </div>
-      <div className='inputField'>
-        <input type='password' placeholder='Heslo' name='password' onChange={handleChange} />
-      </div>
-      <button onClick={loginFunction} className='loginButton'>
-        Prihlasit se
-      </button>
     </div>
   )
 }

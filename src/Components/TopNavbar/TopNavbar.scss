@@ -15,7 +15,6 @@
   padding: 0 20px;
   a {
     display: flex;
-    padding: 0 20px;
     justify-content: center;
     align-items: center;
   }
@@ -27,10 +26,7 @@
 
 .active-menu-item {
   .menu-text {
-    transition: all 0.2s;
     color: #008b8b;
-    font-weight: 700;
-    font-size: 42px;
   }
 }
 

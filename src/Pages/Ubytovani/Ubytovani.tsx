@@ -17,7 +17,7 @@ const Ubytovani: FC = () => {
   return (
     <div className='rooms'>
       <div className='containerStyles'>
-        <ImageSlider images={jednoluzkoPictures} styling='roomImageSlider'></ImageSlider>
+        <ImageSlider pictures={jednoluzkoPictures} styling='roomImageSlider'></ImageSlider>
       </div>
       <div>
         <h1></h1>

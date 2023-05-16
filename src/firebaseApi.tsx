@@ -16,28 +16,28 @@ export const getHomePageTranslated = async () => {
 }
 
 export const getNabidkaJidelPageMenuTranslated = async () => {
-  const TranDataHomePage = await getDoc(
+  const TranDataNabidkaJidel = await getDoc(
     doc(db, "translation_collection_path", "nabidkaJidelPageMenu"),
   ).then((queryData) => {
     return queryData.data()
   })
-  return TranDataHomePage
+  return TranDataNabidkaJidel
 }
 export const getNavbarTranslated = async () => {
-  const TranDataHomePage = await getDoc(doc(db, "translation_collection_path", "navbar")).then(
+  const TranDataNavbar = await getDoc(doc(db, "translation_collection_path", "navbar")).then(
     (queryData) => {
       return queryData.data()
     },
   )
-  return TranDataHomePage
+  return TranDataNavbar
 }
 export const getUbytovaniPageMenuTranslated = async () => {
-  const TranDataHomePage = await getDoc(
+  const TranDataUbytovaniPageMenu = await getDoc(
     doc(db, "translation_collection_path", "ubytovaniPageMenu"),
   ).then((queryData) => {
     return queryData.data()
   })
-  return TranDataHomePage
+  return TranDataUbytovaniPageMenu
 }
 
 // GET PICTURES

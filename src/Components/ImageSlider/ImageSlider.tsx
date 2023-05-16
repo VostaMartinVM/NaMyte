@@ -1,23 +1,36 @@
-import React, { FC, useEffect, useState } from "react"
+import { FC, useEffect, useState } from "react"
 import "./ImageSlider.scss"
 
 type props = {
-  images?: string[]
+  pictures: string[] | undefined
   styling: string
 }
 
-const ImageSlider: FC<props> = ({ images, styling }) => {
-  const [currentImg, setCurrentImg] = useState(images)
+const SLIDE_DURATION = 3000
+
+const ImageSliderPopup: FC<props> = ({ pictures, styling }) => {
+  const [currentImg, setCurrentImg] = useState<string | undefined>()
   const [currentIndex, setCurrentIndex] = useState(0)
+
+  useEffect(() => {
+    setCurrentImg(pictures && pictures[currentIndex])
+  }, [currentIndex, pictures])
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      goToNext()
+    }, SLIDE_DURATION)
+    return () => clearInterval(interval)
+  }, [currentIndex])
 
   const goToPrevious = () => {
     const isFirstSlide = currentIndex === 0
-    const newIndex = isFirstSlide && images ? images.length - 1 : currentIndex - 1
+    const newIndex = isFirstSlide && pictures ? pictures.length - 1 : currentIndex - 1
     setCurrentIndex(newIndex)
   }
   const goToNext = () => {
-    if (images) {
-      const isLastSlide = currentIndex === images.length - 1
+    if (pictures) {
+      const isLastSlide = currentIndex === pictures.length - 1
       const newIndex = isLastSlide ? 0 : currentIndex + 1
       setCurrentIndex(newIndex)
     }
@@ -25,10 +38,6 @@ const ImageSlider: FC<props> = ({ images, styling }) => {
   const goToSlide = (slideIndex: number) => {
     setCurrentIndex(slideIndex)
   }
-
-  useEffect(() => {
-    setCurrentImg(images)
-  }, [images])
 
   return (
     <div className={styling}>
@@ -41,11 +50,11 @@ const ImageSlider: FC<props> = ({ images, styling }) => {
         </div>
       </div>
       <div className='sliderStyles'>
-        <img className='sliderImage' src={currentImg && currentImg[currentIndex]}></img>
+        <img className='sliderImage' src={currentImg}></img>
       </div>
       <div className='dotContainerStyle'>
-        {images &&
-          images.map((slide, slideIndex) => (
+        {pictures &&
+          pictures.slice(0, 9).map((slide, slideIndex) => (
             <div
               className={currentIndex === slideIndex ? "activeDot" : "dotStyle"}
               key={slideIndex}
@@ -56,9 +65,10 @@ const ImageSlider: FC<props> = ({ images, styling }) => {
               ●
             </div>
           ))}
+        {!currentImg && <div>Loading image...</div>}
       </div>
     </div>
   )
 }
 
-export default ImageSlider
+export default ImageSliderPopup

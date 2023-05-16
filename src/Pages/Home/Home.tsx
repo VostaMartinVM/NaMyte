@@ -1,8 +1,8 @@
-import React, { FC, useEffect, useState } from "react"
-import ImageSlider from "../../Components/ImageSlider/ImageSlider"
+import { FC, useEffect, useState } from "react"
 import "./Home.scss"
 import { getHomePageTranslated, getPicturesHomePage } from "../../firebaseApi"
 import { DocumentData } from "firebase/firestore"
+import ImageSlider from "../../Components/ImageSlider/ImageSlider"
 
 const Home: FC = () => {
   const [translationData, setTranslationData] = useState<DocumentData>()
@@ -23,10 +23,10 @@ const Home: FC = () => {
   return (
     <div className='home'>
       <div className='containerStyles'>
-        <ImageSlider images={homePagePictures} styling='homeImageCard' />
+        <ImageSlider pictures={homePagePictures} styling='homeImageCard' />
       </div>
       <div className='text-container'>
-        <div className='header'>
+        <div className='homeHeader'>
           <h1>{translationData ? translationData.translated_output.header.cs : "Home"}</h1>
         </div>
         <div className='text'>

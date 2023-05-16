@@ -1,16 +1,16 @@
-import React, { FC, useState, useEffect, useRef } from "react"
-import PropTypes from "prop-types"
+import { FC, useState, useEffect, useRef } from "react"
 import "./ImageCard.scss"
-import ImageSlider from "../ImageSlider/ImageSlider"
+import { Picture } from "../../Pages/Galerie/Galerie"
+import ImageSliderPopup from "../ImageSliderPopup/ImageSliderPopup"
 
 type Props = {
-  id: string
-  src: string
-  styling: string
+  id: number
+  pictures: Picture[]
 }
 
-const ImageCard: FC<Props> = ({ id, src, styling }) => {
+const ImageCard: FC<Props> = ({ id, pictures }) => {
   const [modal, setModal] = useState<boolean>(false)
+  const [selectedPicture, setSelectedPicture] = useState<string | undefined>()
 
   const toggleModal = () => {
     setModal(!modal)
@@ -33,17 +33,24 @@ const ImageCard: FC<Props> = ({ id, src, styling }) => {
     }
   }, [modal])
 
+  useEffect(() => {
+    const picture = pictures.find((p) => p.id === id)?.src
+    if (picture) {
+      setSelectedPicture(picture)
+    }
+  }, [id, pictures])
+
   return (
     <>
       <div className='imagecard-container' onClick={toggleModal}>
-        <img className='imageCardImage' src={src}></img>
+        <img className='imageCardImage' src={selectedPicture}></img>
       </div>
 
       {modal && (
         <div>
           <div className='overlay'>
             <div className='modal-content' ref={modalRef}>
-              <ImageSlider images={[src]} styling={styling} />
+              <ImageSliderPopup id={id} pictures={pictures} />
             </div>
           </div>
         </div>
@@ -53,9 +60,3 @@ const ImageCard: FC<Props> = ({ id, src, styling }) => {
 }
 
 export default ImageCard
-
-ImageCard.propTypes = {
-  id: PropTypes.string.isRequired,
-  src: PropTypes.string.isRequired,
-  styling: PropTypes.string.isRequired,
-}

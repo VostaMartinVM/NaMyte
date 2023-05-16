@@ -5,7 +5,9 @@ const Onas: FC = () => {
   return (
     <div className='page'>
       <div className='header'>
-        <h1>Penzion Na Mýtě a restaurace s.r.o.</h1>
+        <div className='oNasHeader'>
+          <h1>Penzion Na Mýtě a restaurace s.r.o.</h1>
+        </div>
         <p>
           Na Mýtě 123
           <br />

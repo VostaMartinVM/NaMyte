@@ -1,6 +1,7 @@
 import React, { FC } from "react"
 import Card from "../../Components/Card/Card"
 import { CardImage } from "../../Components/Card/CardImage"
+import "./Aktivity.scss"
 
 type CardProps = {
   title: string
@@ -12,7 +13,10 @@ type CardProps = {
 const Aktivity: FC = () => {
   const cards: CardProps[] = [
     {
-      imageUrl: { url: "../images/image-1.jpg", title: "beach" },
+      imageUrl: {
+        url: "https://wegotthiscovered.com/wp-content/uploads/2022/05/did-rem-die-re-zero-e1654097742301.jpg",
+        title: "beach",
+      },
       title: "Výlety",
       text: "Tipy na výlety",
       link: "https://www.visittabor.eu/co-delat-v-tabore",
@@ -22,7 +26,7 @@ const Aktivity: FC = () => {
       imageUrl: { url: "../images/image-1.jpg", title: "beach" },
       title: "Koupání",
       text: "Vodní sporty",
-      link: "https://www.koupalistepohoda.cz/pohoda/",
+      link: "https://www.koupalistepohoda.cz",
     },
 
     {
@@ -41,7 +45,7 @@ const Aktivity: FC = () => {
   ]
 
   return (
-    <div className='page'>
+    <div className='aktivityPage'>
       {cards.map((card, index) => (
         <Card
           key={index}

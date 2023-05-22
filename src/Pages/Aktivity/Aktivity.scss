@@ -1,0 +1,7 @@
+.aktivityPage {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 240px;
+  justify-items: center;
+  padding-top: 120px;
+}

@@ -3,6 +3,8 @@ import "./Home.scss"
 import { getHomePageTranslated, getPicturesHomePage } from "../../firebaseApi"
 import { DocumentData } from "firebase/firestore"
 import ImageSlider from "../../Components/ImageSlider/ImageSlider"
+import { RootState } from "../../Redux/store"
+import { useDispatch, useSelector } from "react-redux"
 
 const Home: FC = () => {
   const [translationData, setTranslationData] = useState<DocumentData>()
@@ -20,6 +22,10 @@ const Home: FC = () => {
     fetchData()
   }, [])
 
+  const { lg } = useSelector((state: RootState) => {
+    return state.language
+  })
+
   return (
     <div className='home'>
       <div className='containerStyles'>
@@ -27,10 +33,10 @@ const Home: FC = () => {
       </div>
       <div className='text-container'>
         <div className='homeHeader'>
-          <h1>{translationData ? translationData.translated_output.header.cs : "Home"}</h1>
+          <h1>{translationData ? translationData.translated_output.header[lg] : "Home"}</h1>
         </div>
         <div className='text'>
-          <p>{translationData?.translated_output.introduction.cs} </p>
+          <p>{translationData?.translated_output.introduction[lg]} </p>
         </div>
       </div>
     </div>

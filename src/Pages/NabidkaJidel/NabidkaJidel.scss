@@ -3,3 +3,40 @@
   height: 100%;
   padding: 20px;
 }
+
+.topbar-container {
+  display: flex;
+  height: 150px;
+  width: 100%;
+  padding: 20px;
+  justify-content: center;
+  align-items: center;
+  background-image: url("./menu.png");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.menu-item {
+  padding: 0 20px;
+  a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .menu-text {
+    color: black;
+    text-align: center;
+  }
+}
+
+.active-menu-item {
+  .menu-text {
+    color: #008b8b;
+  }
+}
+
+.menu-text:hover {
+  color: rgb(0, 36, 153);
+  transition: all 0.2s;
+}

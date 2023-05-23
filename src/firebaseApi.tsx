@@ -1,8 +1,6 @@
 import { getDoc, doc } from "firebase/firestore"
 import { db, storage } from "./firebase"
-import { getDownloadURL, listAll, ref } from "firebase/storage"
-
-// GET Auth
+import { getDownloadURL, listAll, ref, uploadBytesResumable } from "firebase/storage"
 
 // GET TRANSLATED DATA
 
@@ -15,13 +13,13 @@ export const getHomePageTranslated = async () => {
   return TranDataHomePage
 }
 
-export const getNabidkaJidelPageMenuTranslated = async () => {
-  const TranDataNabidkaJidel = await getDoc(
+export const getNabidkaJidelTranslated = async () => {
+  const TranslatedNabidkaJidel = await getDoc(
     doc(db, "translation_collection_path", "nabidkaJidelPageMenu"),
   ).then((queryData) => {
     return queryData.data()
   })
-  return TranDataNabidkaJidel
+  return TranslatedNabidkaJidel
 }
 export const getNavbarTranslated = async () => {
   const TranDataNavbar = await getDoc(doc(db, "translation_collection_path", "navbar")).then(
@@ -33,7 +31,7 @@ export const getNavbarTranslated = async () => {
 }
 export const getUbytovaniPageMenuTranslated = async () => {
   const TranDataUbytovaniPageMenu = await getDoc(
-    doc(db, "translation_collection_path", "ubytovaniPageMenu"),
+    doc(db, "translation_collection_path", "ubytovani"),
   ).then((queryData) => {
     return queryData.data()
   })
@@ -112,4 +110,11 @@ export const getPicturesSvatby = async () => {
 
   const urlPromises = refs.items.map((imageRef) => getDownloadURL(imageRef))
   return Promise.all(urlPromises)
+}
+
+// Upload pdf
+
+export const uploadPdf = (pdf: File) => {
+  const pdfRef = ref(storage, `JidelniListek/${pdf.name}`)
+  uploadBytesResumable(pdfRef, pdf)
 }

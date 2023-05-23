@@ -27,6 +27,10 @@ const Navbar: FC = () => {
     dispatch(setLanguage("cs"))
   }
 
+  const nemcina = () => {
+    dispatch(setLanguage("de"))
+  }
+
   const [translationData, setTranslationData] = useState<DocumentData>()
 
   const [logoPictures, setLogoPictures] = useState<string[]>()
@@ -48,7 +52,7 @@ const Navbar: FC = () => {
       path: "/NabidkaJidel/DenniMenu",
     },
     {
-      title: "Ubytovani",
+      title: translationData?.translated_output.ubytovani[lg],
       path: "/Ubytovani",
     },
     {
@@ -103,7 +107,9 @@ const Navbar: FC = () => {
         <button className='ajina' onClick={english}>
           ajina
         </button>
-        <button className='nemcina'>nemcina</button>
+        <button className='nemcina' onClick={nemcina}>
+          nemcina
+        </button>
       </div>
     </div>
   )

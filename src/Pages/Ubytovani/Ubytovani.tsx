@@ -1,18 +1,28 @@
 import React, { FC, useEffect, useState } from "react"
 import "./Ubytovani.scss"
-import { getPicturesJednoluzko } from "../../firebaseApi"
+import { getPicturesJednoluzko, getUbytovaniPageMenuTranslated } from "../../firebaseApi"
 import ImageSlider from "../../Components/ImageSlider/ImageSlider"
+import { DocumentData } from "firebase/firestore"
+import { useSelector } from "react-redux"
+import { RootState } from "../../Redux/store"
 
 const Ubytovani: FC = () => {
   const [jednoluzkoPictures, setJednoluzkoPictures] = useState<string[]>()
+  const [translationData, setTranslationData] = useState<DocumentData>()
 
   useEffect(() => {
     const fetchData = async () => {
       const fetchedPictures = await getPicturesJednoluzko()
+      const translatedUbytovani = await getUbytovaniPageMenuTranslated()
       setJednoluzkoPictures(fetchedPictures)
+      setTranslationData(translatedUbytovani)
     }
     fetchData()
   }, [])
+
+  const { lg } = useSelector((state: RootState) => {
+    return state.language
+  })
 
   return (
     <div className='rooms'>
@@ -22,12 +32,19 @@ const Ubytovani: FC = () => {
       <div>
         <h1></h1>
         <p>
-          Nabízíme ubytování v pokojích po jednom, dvou a tří lůžkách <br />
-          Cena za jednu noc se snídaní včetně parkování: <i>890 ,-Kč</i> <br />
-          Každý pokoj je vybaven vlastním sociálním zařízením a LCD televizorem <br />
-          V celé budově je dostupný internet <br />
-          Soukromé parkoviště se na noc uzamyká <br />
-          Nabízíme i možnost přistýlky <br />
+          {translationData?.translated_output.info1[lg]}
+          <br />
+          {translationData?.translated_output.info2[lg]}
+          <i>890 ,-Kč</i>
+          <br />
+          {translationData?.translated_output.info3[lg]}
+          <br />
+          {translationData?.translated_output.info4[lg]}
+          <br />
+          {translationData?.translated_output.info5[lg]}
+          <br />
+          {translationData?.translated_output.info6[lg]}
+          <br />
         </p>
       </div>
     </div>

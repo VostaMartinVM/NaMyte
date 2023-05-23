@@ -13,6 +13,7 @@ const NabidkaJidel: FC = () => {
     const fetchData = async () => {
       const fetchedTranslation = await getNabidkaJidelTranslated()
       setTranslationData(fetchedTranslation)
+      console.log(fetchedTranslation)
     }
     fetchData()
   }, [])
@@ -21,26 +22,25 @@ const NabidkaJidel: FC = () => {
     return state.language
   })
 
-  const menuItems = translationData
-    ? [
-        {
-          title: translationData?.translated_output.denniMenu[lg],
-          path: "/NabidkaJidel/DenniMenu",
-        },
-        {
-          title: translationData?.translated_output.vikendoveMenu[lg],
-          path: "/NabidkaJidel/VikendoveMenu",
-        },
-        {
-          title: translationData?.translated_output.jedilniListek[lg],
-          path: "/NabidkaJidel/JidelniListek",
-        },
-      ]
-    : []
+  const menuItems = [
+    {
+      title: translationData?.translated_output.denniMenu[lg],
+      path: "/NabidkaJidel/DenniMenu",
+    },
+    {
+      title: translationData?.translated_output.jidelniListek[lg],
+      path: "/NabidkaJidel/VikendoveMenu",
+    },
+    {
+      title: translationData?.translated_output.vikendoveMenu[lg],
+      path: "/NabidkaJidel/JidelniListek",
+    },
+  ]
 
   return (
     <div className='nabidkaJidel'>
       <div className='topbar-container'>
+        {console.log(translationData) as any}
         {menuItems.map((item, index) => {
           return (
             <div

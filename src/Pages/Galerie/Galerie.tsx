@@ -1,5 +1,6 @@
 import { FC, useEffect, useState } from "react"
 import {
+  getGalerieTranslated,
   getPicturesDvouluzko,
   getPicturesHomePage,
   getPicturesJednoluzko,
@@ -8,6 +9,9 @@ import {
 } from "../../firebaseApi"
 import ImageCard from "../../Components/ImageCard/ImageCard"
 import "./Galerie.scss"
+import { useSelector } from "react-redux"
+import { RootState } from "../../Redux/store"
+import { DocumentData } from "firebase/firestore"
 
 export interface Picture {
   id: number
@@ -16,6 +20,21 @@ export interface Picture {
 }
 
 const Galerie: FC = () => {
+  const [translationData, setTranslationData] = useState<DocumentData>()
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetchedTranslation = await getGalerieTranslated()
+      setTranslationData(fetchedTranslation)
+      console.log(fetchedTranslation)
+    }
+    fetchData()
+  }, [])
+
+  const { lg } = useSelector((state: RootState) => {
+    return state.language
+  })
+
   const [pictures, setPictures] = useState<Picture[]>([])
 
   useEffect(() => {
@@ -48,7 +67,7 @@ const Galerie: FC = () => {
   return (
     <div>
       <div className='galerieHeader'>
-        <h1>Penzion</h1>
+        <h1>{translationData?.translated_output.Penzion[lg]}</h1>
       </div>
       <div className='galeryStructure'>
         {pictures
@@ -57,7 +76,7 @@ const Galerie: FC = () => {
             <ImageCard key={`homePage-${index}`} id={picture.id} pictures={pictures} />
           ))}
         <div className='galerieHeader'>
-          <h1>Jednoluzko</h1>
+          <h1>{translationData?.translated_output.Jednoluzko[lg]}</h1>
         </div>
         <div className='galeryStructure'>
           {pictures
@@ -67,7 +86,7 @@ const Galerie: FC = () => {
             ))}
         </div>
         <div className='galerieHeader'>
-          <h1>Dvouluzko</h1>
+          <h1>{translationData?.translated_output.Dvouluzko[lg]}</h1>
         </div>
         <div className='galeryStructure'>
           {pictures
@@ -77,7 +96,7 @@ const Galerie: FC = () => {
             ))}
         </div>
         <div className='galerieHeader'>
-          <h1>Triluzko</h1>
+          <h1>{translationData?.translated_output.Triluzko[lg]}</h1>
         </div>
         <div className='galeryStructure'>
           {pictures
@@ -87,7 +106,7 @@ const Galerie: FC = () => {
             ))}
         </div>
         <div className='galerieHeader'>
-          <h1>Svatby</h1>
+          <h1>{translationData?.translated_output.Svatby[lg]}</h1>
         </div>
         <div className='galeryStructure'>
           {pictures

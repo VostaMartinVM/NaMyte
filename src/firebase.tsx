@@ -1,9 +1,9 @@
-import * as firebase from "firebase/app"
-import { getFirestore } from "firebase/firestore"
+import firebase from "firebase/compat/app"
+import "firebase/compat/auth"
+import "firebase/compat/firestore"
 import { getStorage } from "firebase/storage"
-import { getAuth } from "firebase/auth"
 
-const app = firebase.initializeApp({
+const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
   projectId: process.env.REACT_APP_FIREBASE_PROJECTID,
@@ -11,12 +11,11 @@ const app = firebase.initializeApp({
   messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
-})
+}
 
-export const db = getFirestore(app)
+const firebaseApp = firebase.initializeApp(firebaseConfig)
+const auth = firebaseApp.auth()
+const db = firebaseApp.firestore()
+const storage = getStorage()
 
-export const storage = getStorage(app)
-
-export const auth = getAuth(app)
-
-export default app
+export { db, auth, storage }

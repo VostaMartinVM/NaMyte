@@ -14,20 +14,23 @@ export const getHomePageTranslated = async () => {
 }
 
 export const getNabidkaJidelTranslated = async () => {
-  const TranslatedNabidkaJidel = await getDoc(
-    doc(db, "translation_collection_path", "nabidkaJidelPageMenu"),
-  ).then((queryData) => {
-    return queryData.data()
+  let TranslatedNabidkaJidel
+  ;(await db.collection("translation_collection_path").get()).forEach((doc) => {
+    if (doc.id === "nabidkaJidelPageMenu") {
+      TranslatedNabidkaJidel = doc.data()
+    }
   })
+
   return TranslatedNabidkaJidel
 }
 export const getNavbarTranslated = async () => {
-  const TranDataNavbar = await getDoc(doc(db, "translation_collection_path", "navbar")).then(
-    (queryData) => {
-      return queryData.data()
-    },
-  )
-  return TranDataNavbar
+  let TranslatedNavbar = undefined
+  ;(await db.collection("translation_collection_path").get()).forEach((doc) => {
+    if (doc.id === "navbar") {
+      TranslatedNavbar = doc.data()
+    }
+  })
+  return TranslatedNavbar
 }
 export const getUbytovaniPageMenuTranslated = async () => {
   const TranDataUbytovaniPageMenu = await getDoc(
@@ -36,6 +39,16 @@ export const getUbytovaniPageMenuTranslated = async () => {
     return queryData.data()
   })
   return TranDataUbytovaniPageMenu
+}
+
+export const getGalerieTranslated = async () => {
+  let TranslatedGalerie = undefined
+  ;(await db.collection("translation_collection_path").get()).forEach((doc) => {
+    if (doc.id === "galerie") {
+      TranslatedGalerie = doc.data()
+    }
+  })
+  return TranslatedGalerie
 }
 
 // GET PICTURES

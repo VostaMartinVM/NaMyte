@@ -1,14 +1,60 @@
 import React, { FC } from "react"
 import Card from "../../Components/Card/Card"
+import { CardImage } from "../../Components/Card/CardImage"
+import "./Aktivity.scss"
+
+type CardProps = {
+  title: string
+  imageUrl: CardImage
+  text: string
+  link: string
+}
 
 const Aktivity: FC = () => {
-  const image = { url: "../images/image-1.jpg", title: "beach" }
-  const title = "karta lol"
-  const text = "ja nevim uz"
+  const cards: CardProps[] = [
+    {
+      imageUrl: {
+        url: "https://wegotthiscovered.com/wp-content/uploads/2022/05/did-rem-die-re-zero-e1654097742301.jpg",
+        title: "beach",
+      },
+      title: "Výlety",
+      text: "Tipy na výlety",
+      link: "https://www.visittabor.eu/co-delat-v-tabore",
+    },
+
+    {
+      imageUrl: { url: "../images/image-1.jpg", title: "beach" },
+      title: "Koupání",
+      text: "Vodní sporty",
+      link: "https://www.koupalistepohoda.cz",
+    },
+
+    {
+      imageUrl: { url: "../images/image-1.jpg", title: "beach" },
+      title: "Tenis",
+      text: "Tenisová hala",
+      link: "https://tenissezimak.cz",
+    },
+
+    {
+      imageUrl: { url: "../images/image-1.jpg", title: "beach" },
+      title: "Akce",
+      text: "Kalendář akcí v Táboře",
+      link: "https://www.visittabor.eu/kalendar-akci",
+    },
+  ]
 
   return (
-    <div className='page'>
-      <Card title={title} imageUrl={image} text={text} />
+    <div className='aktivityPage'>
+      {cards.map((card, index) => (
+        <Card
+          key={index}
+          title={card.title}
+          imageUrl={card.imageUrl}
+          text={card.text}
+          link={card.link}
+        />
+      ))}
     </div>
   )
 }

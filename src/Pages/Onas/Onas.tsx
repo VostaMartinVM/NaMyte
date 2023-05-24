@@ -1,22 +1,45 @@
-import React, { FC } from "react"
+import React, { FC, useEffect, useState } from "react"
 import "./Onas.scss"
+import { DocumentData } from "@firebase/firestore-types"
+import { getOnasTranslated } from "../../firebaseApi"
+import { useSelector } from "react-redux"
+import { RootState } from "../../Redux/store"
 
 const Onas: FC = () => {
+  const [translationData, setTranslationData] = useState<DocumentData>()
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetchedTranslation = await getOnasTranslated()
+      setTranslationData(fetchedTranslation)
+      console.log(fetchedTranslation)
+    }
+    fetchData()
+  }, [])
+
+  const { lg } = useSelector((state: RootState) => {
+    return state.language
+  })
+
   return (
     <div className='page'>
       <div className='header'>
         <div className='oNasHeader'>
-          <h1>Penzion Na Mýtě a restaurace s.r.o.</h1>
+          <h1>{translationData?.translated_output.h1[lg]}</h1>
         </div>
         <p>
           Na Mýtě 123
           <br />
-          391 01 Sezimovo Ústí 1<br />
-          Tel.: <b>381 214 730</b> - Ubytování, rezervace a restaurace
+          391 01 Sezimovo Ústí 1
+          <br />
+          {translationData?.translated_output.p3[lg]}
+          <b>381 214 730</b>
+          {translationData?.translated_output.p4[lg]}
           <br />
           IČO: 05518385 <br />
-          Spisová značka firmy C 25376 vedená u krajského soudu v Českých Budějovicích <br />
-          E-mail:{" "}
+          {translationData?.translated_output.p5[lg]}
+          <br />
+          {translationData?.translated_output.p6[lg]}
           <a href='mailto:penzion-namyte@seznam.cz'>
             <b>penzion-namyte@seznam.cz</b>
           </a>
@@ -25,8 +48,10 @@ const Onas: FC = () => {
       </div>
       <div className='sneaky'>
         <p>
-          V případě, že se nedovoláte na pevnou linku <br />
-          Mobil: <b>777 203 741</b> - Pavel Růžička (10-18)
+          {translationData?.translated_output.p7[lg]}
+          <br />
+          {translationData?.translated_output.p8[lg]}
+          <b>777 203 741</b> - Pavel Růžička (10-18)
         </p>
       </div>
       <div className='map'>

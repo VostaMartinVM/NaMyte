@@ -1,11 +1,9 @@
 import { FC, useEffect, useState } from "react"
 import {
   getGalerieTranslated,
-  getPicturesDvouluzko,
   getPicturesHomePage,
-  getPicturesJednoluzko,
   getPicturesSvatby,
-  getPicturesTriluzko,
+  getPicturesUbytovani,
 } from "../../firebaseApi"
 import ImageCard from "../../Components/ImageCard/ImageCard"
 import "./Galerie.scss"
@@ -40,16 +38,12 @@ const Galerie: FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       const fetchedHomePagePictures = await getPicturesHomePage()
-      const fetchedJednoluzkoPictures = await getPicturesJednoluzko()
-      const fetchedDvouluzkoPictures = await getPicturesDvouluzko()
-      const fetchedTriluzkoPictures = await getPicturesTriluzko()
       const fetchedSvatbyPictures = await getPicturesSvatby()
+      const fetchedUbytovaniPictures = await getPicturesUbytovani()
 
       const allPictures = [
         ...fetchedHomePagePictures.map((src) => ({ src, folder: "homePage" })),
-        ...fetchedJednoluzkoPictures.map((src) => ({ src, folder: "jednoluzko" })),
-        ...fetchedDvouluzkoPictures.map((src) => ({ src, folder: "dvouluzko" })),
-        ...fetchedTriluzkoPictures.map((src) => ({ src, folder: "triluzko" })),
+        ...fetchedUbytovaniPictures.map((src) => ({ src, folder: "ubytovani" })),
         ...fetchedSvatbyPictures.map((src) => ({ src, folder: "svatby" })),
       ]
 
@@ -76,33 +70,13 @@ const Galerie: FC = () => {
             <ImageCard key={`homePage-${index}`} id={picture.id} pictures={pictures} />
           ))}
         <div className='galerieHeader'>
-          <h1>{translationData?.translated_output.Jednoluzko[lg]}</h1>
+          <h1>{translationData?.translated_output.Ubytovani[lg]}</h1>
         </div>
         <div className='galeryStructure'>
           {pictures
-            .filter((picture) => picture.folder === "jednoluzko")
+            .filter((picture) => picture.folder === "ubytovani")
             .map((picture, index) => (
-              <ImageCard key={`jednoluzko-${index}`} id={picture.id} pictures={pictures} />
-            ))}
-        </div>
-        <div className='galerieHeader'>
-          <h1>{translationData?.translated_output.Dvouluzko[lg]}</h1>
-        </div>
-        <div className='galeryStructure'>
-          {pictures
-            .filter((picture) => picture.folder === "dvouluzko")
-            .map((picture, index) => (
-              <ImageCard key={`dvouluzko-${index}`} id={picture.id} pictures={pictures} />
-            ))}
-        </div>
-        <div className='galerieHeader'>
-          <h1>{translationData?.translated_output.Triluzko[lg]}</h1>
-        </div>
-        <div className='galeryStructure'>
-          {pictures
-            .filter((picture) => picture.folder === "triluzko")
-            .map((picture, index) => (
-              <ImageCard key={`triluzko-${index}`} id={picture.id} pictures={pictures} />
+              <ImageCard key={`ubytovani-${index}`} id={picture.id} pictures={pictures} />
             ))}
         </div>
         <div className='galerieHeader'>

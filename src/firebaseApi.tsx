@@ -51,6 +51,26 @@ export const getGalerieTranslated = async () => {
   return TranslatedGalerie
 }
 
+export const getAktivityTranslated = async () => {
+  let TranslatedOnas = undefined
+  ;(await db.collection("translation_collection_path").get()).forEach((doc) => {
+    if (doc.id === "aktivity") {
+      TranslatedOnas = doc.data()
+    }
+  })
+  return TranslatedOnas
+}
+
+export const getOnasTranslated = async () => {
+  let TranslatedOnas = undefined
+  ;(await db.collection("translation_collection_path").get()).forEach((doc) => {
+    if (doc.id === "oNas") {
+      TranslatedOnas = doc.data()
+    }
+  })
+  return TranslatedOnas
+}
+
 // GET PICTURES
 
 export const getPicturesHomePage = async () => {
@@ -93,24 +113,8 @@ export const getPicturesJidelniListek = async () => {
   return Promise.all(urlPromises)
 }
 
-export const getPicturesJednoluzko = async () => {
-  const listRef = ref(storage, "Jednoluzko/")
-  const refs = await listAll(listRef)
-
-  const urlPromises = refs.items.map((imageRef) => getDownloadURL(imageRef))
-  return Promise.all(urlPromises)
-}
-
-export const getPicturesDvouluzko = async () => {
-  const listRef = ref(storage, "Dvouluzko/")
-  const refs = await listAll(listRef)
-
-  const urlPromises = refs.items.map((imageRef) => getDownloadURL(imageRef))
-  return Promise.all(urlPromises)
-}
-
-export const getPicturesTriluzko = async () => {
-  const listRef = ref(storage, "Triluzko/")
+export const getPicturesUbytovani = async () => {
+  const listRef = ref(storage, "Ubytovani/")
   const refs = await listAll(listRef)
 
   const urlPromises = refs.items.map((imageRef) => getDownloadURL(imageRef))
@@ -119,6 +123,14 @@ export const getPicturesTriluzko = async () => {
 
 export const getPicturesSvatby = async () => {
   const listRef = ref(storage, "Svatby/")
+  const refs = await listAll(listRef)
+
+  const urlPromises = refs.items.map((imageRef) => getDownloadURL(imageRef))
+  return Promise.all(urlPromises)
+}
+
+export const getPicturesAktivity = async () => {
+  const listRef = ref(storage, "Aktivity/")
   const refs = await listAll(listRef)
 
   const urlPromises = refs.items.map((imageRef) => getDownloadURL(imageRef))

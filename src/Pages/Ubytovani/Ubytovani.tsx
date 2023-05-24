@@ -1,20 +1,20 @@
 import React, { FC, useEffect, useState } from "react"
 import "./Ubytovani.scss"
-import { getPicturesJednoluzko, getUbytovaniPageMenuTranslated } from "../../firebaseApi"
+import { getPicturesUbytovani, getUbytovaniPageMenuTranslated } from "../../firebaseApi"
 import ImageSlider from "../../Components/ImageSlider/ImageSlider"
 import { DocumentData } from "firebase/firestore"
 import { useSelector } from "react-redux"
 import { RootState } from "../../Redux/store"
 
 const Ubytovani: FC = () => {
-  const [jednoluzkoPictures, setJednoluzkoPictures] = useState<string[]>()
+  const [ubytovaniPictures, setUbytovaniPictures] = useState<string[]>()
   const [translationData, setTranslationData] = useState<DocumentData>()
 
   useEffect(() => {
     const fetchData = async () => {
-      const fetchedPictures = await getPicturesJednoluzko()
+      const fetchedPictures = await getPicturesUbytovani()
       const translatedUbytovani = await getUbytovaniPageMenuTranslated()
-      setJednoluzkoPictures(fetchedPictures)
+      setUbytovaniPictures(fetchedPictures)
       setTranslationData(translatedUbytovani)
     }
     fetchData()
@@ -27,7 +27,7 @@ const Ubytovani: FC = () => {
   return (
     <div className='rooms'>
       <div className='containerStyles'>
-        <ImageSlider pictures={jednoluzkoPictures} styling='roomImageSlider'></ImageSlider>
+        <ImageSlider pictures={ubytovaniPictures} styling='roomImageSlider'></ImageSlider>
       </div>
       <div>
         <h1></h1>

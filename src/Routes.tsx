@@ -4,9 +4,7 @@ import Aktivity from "./Pages/Aktivity/Aktivity"
 import Galerie from "./Pages/Galerie/Galerie"
 import Home from "./Pages/Home/Home"
 import NabidkaJidel from "./Pages/NabidkaJidel/NabidkaJidel"
-import DenniMenu from "./Pages/NabidkaJidel/DenniMenu"
-import VikendoveMenu from "./Pages/NabidkaJidel/VikendoveMenu"
-import JidelniListek from "./Pages/NabidkaJidel/JidelniListek"
+import DenniNabidka from "./Pages/DenniNabidka/DenniNabidka"
 import Onas from "./Pages/Onas/Onas"
 import Ubytovani from "./Pages/Ubytovani/Ubytovani"
 import Admin from "./Pages/Admin/Admin"
@@ -28,11 +26,8 @@ const Routes = createBrowserRouter(
       />
       <Route path='' element={<App />}>
         <Route path='/' element={<Home />} />
-        <Route path='NabidkaJidel' element={<NabidkaJidel />}>
-          <Route path='DenniMenu' element={<DenniMenu />} />
-          <Route path='VikendoveMenu' element={<VikendoveMenu />} />
-          <Route path='JidelniListek' element={<JidelniListek />} />
-        </Route>
+        <Route path='NabidkaJidel' element={<NabidkaJidel />} />
+        <Route path='DenniNabidka' element={<DenniNabidka />} />
         <Route path='Ubytovani' element={<Ubytovani />} />
         <Route path='Galerie' element={<Galerie />} />
         <Route path='Aktivity' element={<Aktivity />} />

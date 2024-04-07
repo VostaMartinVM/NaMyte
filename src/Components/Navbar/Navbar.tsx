@@ -7,6 +7,11 @@ import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../../Redux/store"
 import { setLanguage } from "../../Redux/Slices/Languages"
 
+import { MdEmail, MdRestaurant, MdOutlineSportsHandball } from "react-icons/md"
+import { FaImages } from "react-icons/fa"
+import { PiBowlFoodFill } from "react-icons/pi"
+import { FaBed } from "react-icons/fa6"
+
 const Navbar: FC = () => {
   const location = useLocation()
   const [activeLink, setActiveLink] = useState("")
@@ -22,25 +27,26 @@ const Navbar: FC = () => {
   const english = () => {
     dispatch(setLanguage("en"))
   }
-
   const cestina = () => {
     dispatch(setLanguage("cs"))
   }
-
   const nemcina = () => {
     dispatch(setLanguage("de"))
   }
 
   const [translationData, setTranslationData] = useState<DocumentData>()
-
+  const [isLoading, setIsLoading] = useState(true)
   const [logoPictures, setLogoPictures] = useState<string[]>()
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true)
+
       const fetchedTranslation = await getNavbarTranslated()
       const fetchedPictures = await getPicturesLogo()
       setLogoPictures(fetchedPictures)
       setTranslationData(fetchedTranslation)
+      setIsLoading(false)
     }
 
     fetchData()
@@ -48,24 +54,40 @@ const Navbar: FC = () => {
 
   const SidebarData = [
     {
-      title: translationData?.translated_output.nabydkaJidel[lg],
-      path: "/NabidkaJidel/DenniMenu",
+      skeleton: "Denni nabidka",
+      title: "Denni nabidka",
+      path: "/DenniNabidka",
+      icon: <MdRestaurant className='icon' />,
     },
     {
+      skeleton: "Nabidka jidel",
+      title: translationData?.translated_output.nabydkaJidel[lg],
+      path: "/NabidkaJidel",
+      icon: <PiBowlFoodFill className='icon' />,
+    },
+    {
+      skeleton: "Ubytovani",
       title: translationData?.translated_output.ubytovani[lg],
       path: "/Ubytovani",
+      icon: <FaBed className='icon' />,
     },
     {
+      skeleton: "Galerie",
       title: translationData?.translated_output.galerie[lg],
       path: "/Galerie",
+      icon: <FaImages className='icon' />,
     },
     {
+      skeleton: "Aktivity",
       title: translationData?.translated_output.aktivity[lg],
       path: "/Aktivity",
+      icon: <MdOutlineSportsHandball className='icon' />,
     },
     {
+      skeleton: "O nas",
       title: translationData?.translated_output.oNas[lg],
       path: "/Onas",
+      icon: <MdEmail className='icon' />,
     },
   ]
 
@@ -95,21 +117,24 @@ const Navbar: FC = () => {
                 key={index}
               >
                 <Link to={item.path} onClick={() => handleLinkClick(item.path)}>
-                  <span className='menu-text'>{item.title}</span>
+                  {item.icon}
+                  <span className='menu-text'>{isLoading ? item.skeleton : item.title}</span>
                 </Link>
               </li>
             )
           })}
         </ul>
-        <button className='cestina' onClick={cestina}>
-          cestina
-        </button>
-        <button className='ajina' onClick={english}>
-          ajina
-        </button>
-        <button className='nemcina' onClick={nemcina}>
-          nemcina
-        </button>
+        <div className='languages'>
+          <button className='cestina languageButton' onClick={cestina}>
+            Czech
+          </button>
+          <button className='ajina languageButton' onClick={english}>
+            English
+          </button>
+          <button className='nemcina languageButton' onClick={nemcina}>
+            German
+          </button>
+        </div>
       </div>
     </div>
   )

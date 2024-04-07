@@ -1,19 +1,19 @@
 import { FC, useEffect, useState } from "react"
-import { Link, Outlet } from "react-router-dom"
 import "./NabidkaJidel.scss"
+import { getNabidkaJidelTranslated, getPicturesAktivity } from "../../firebaseApi"
+import { DocumentData } from "firebase/firestore"
 import { useSelector } from "react-redux"
 import { RootState } from "../../Redux/store"
-import { getNabidkaJidelTranslated } from "../../firebaseApi"
-import { DocumentData } from "firebase/firestore"
-
 const NabidkaJidel: FC = () => {
   const [translationData, setTranslationData] = useState<DocumentData>()
+  const [aktivityPictures, setAktivityPictures] = useState<string[]>([])
 
   useEffect(() => {
     const fetchData = async () => {
       const fetchedTranslation = await getNabidkaJidelTranslated()
+      const fetchedPictures = await getPicturesAktivity()
+      setAktivityPictures(fetchedPictures)
       setTranslationData(fetchedTranslation)
-      console.log(fetchedTranslation)
     }
     fetchData()
   }, [])
@@ -22,40 +22,59 @@ const NabidkaJidel: FC = () => {
     return state.language
   })
 
-  const menuItems = [
-    {
-      title: translationData?.translated_output.denniMenu[lg],
-      path: "/NabidkaJidel/DenniMenu",
-    },
-    {
-      title: translationData?.translated_output.jidelniListek[lg],
-      path: "/NabidkaJidel/VikendoveMenu",
-    },
-    {
-      title: translationData?.translated_output.vikendoveMenu[lg],
-      path: "/NabidkaJidel/JidelniListek",
-    },
-  ]
-
   return (
     <div className='nabidkaJidel'>
-      <div className='topbar-container'>
-        {console.log(translationData) as any}
-        {menuItems.map((item, index) => {
-          return (
-            <div
-              className={location.pathname === item.path ? "active-menu-item" : "menu-item"}
-              key={index}
-            >
-              <Link to={item.path}>
-                <span className='menu-text'>{item.title}</span>
-              </Link>
-            </div>
-          )
-        })}
+      <div className='homeHeader'>
+        <h1>Home</h1>
       </div>
-
-      <Outlet />
+      <div className='row'>
+        <div className='column'>
+          <div className='nabidkaJidelcontent'>
+            <h1></h1>
+            <p></p>
+            <button className='linkButton'>Navstivit stranku</button>
+          </div>
+        </div>
+        <div className='column'>
+          <img className='imageCardImage' src={aktivityPictures[0]} alt='Img not found'></img>
+        </div>
+      </div>
+      <div className='row'>
+        <div className='column'>
+          <img className='imageCardImage' src={aktivityPictures[1]} alt='Img not found'></img>
+        </div>
+        <div className='column'>
+          <div className='nabidkaJidelcontent'>
+            <h1></h1>
+            <p></p>
+            <button className='linkButton'>Navstivit stranku</button>
+          </div>
+        </div>
+      </div>
+      <div className='row'>
+        <div className='column'>
+          <div className='nabidkaJidelcontent'>
+            <h1></h1>
+            <p></p>
+            <button className='linkButton'>Navstivit stranku</button>
+          </div>
+        </div>
+        <div className='column'>
+          <img className='imageCardImage' src={aktivityPictures[2]} alt='Img not found'></img>
+        </div>
+      </div>
+      <div className='row'>
+        <div className='column'>
+          <img className='imageCardImage' src={aktivityPictures[3]} alt='Img not found'></img>
+        </div>
+        <div className='column'>
+          <div className='nabidkaJidelcontent'>
+            <h1></h1>
+            <p></p>
+            <button className='linkButton'>Navstivit stranku</button>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

@@ -4,11 +4,10 @@ import { getHomePageTranslated, getPicturesHomePage } from "../../firebaseApi"
 import { DocumentData } from "firebase/firestore"
 import ImageSlider from "../../Components/ImageSlider/ImageSlider"
 import { RootState } from "../../Redux/store"
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 
 const Home: FC = () => {
   const [translationData, setTranslationData] = useState<DocumentData>()
-
   const [homePagePictures, setHomePagePictures] = useState<string[]>()
 
   useEffect(() => {

@@ -1,6 +1,4 @@
 import React, { FC, useEffect, useState } from "react"
-import Card from "../../Components/Card/Card"
-import { CardImage } from "../../Components/Card/CardImage"
 import "./Aktivity.scss"
 import { useSelector } from "react-redux"
 import { RootState } from "../../Redux/store"
@@ -9,15 +7,17 @@ import { DocumentData } from "@firebase/firestore-types"
 
 const Aktivity: FC = () => {
   const [translationData, setTranslationData] = useState<DocumentData>()
-  const [aktivityPictures, setAktivityPictures] = useState<string[]>()
+  const [aktivityPictures, setAktivityPictures] = useState<string[]>([])
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true)
       const fetchedTranslation = await getAktivityTranslated()
       const fetchedPictures = await getPicturesAktivity()
       setAktivityPictures(fetchedPictures)
       setTranslationData(fetchedTranslation)
-      console.log(fetchedTranslation)
+      setIsLoading(false)
     }
     fetchData()
   }, [])
@@ -26,50 +26,96 @@ const Aktivity: FC = () => {
     return state.language
   })
 
-  const cards = [
-    {
-      imageUrl: {
-        url: "https://wegotthiscovered.com/wp-content/uploads/2022/05/did-rem-die-re-zero-e1654097742301.jpg",
-        title: "beach",
-      },
-      title: translationData?.translated_output.title1[lg],
-      text: translationData?.translated_output.text1[lg],
-      link: "https://www.visittabor.eu/co-delat-v-tabore",
-    },
+  const link1 = () => {
+    window.location.href = "https://www.visittabor.eu/co-delat-v-tabore"
+  }
 
-    {
-      imageUrl: { url: "../images/image-1.jpg", title: "beach" },
-      title: translationData?.translated_output.title2[lg],
-      text: translationData?.translated_output.text2[lg],
-      link: "https://www.koupalistepohoda.cz",
-    },
+  const link2 = () => {
+    window.location.href = "https://www.koupalistepohoda.cz"
+  }
 
-    {
-      imageUrl: { url: "../images/image-1.jpg", title: "beach" },
-      title: translationData?.translated_output.title3[lg],
-      text: translationData?.translated_output.text3[lg],
-      link: "https://tenissezimak.cz",
-    },
+  const link3 = () => {
+    window.location.href = "https://tenissezimak.cz"
+  }
 
-    {
-      imageUrl: { url: "../images/image-1.jpg", title: "beach" },
-      title: translationData?.translated_output.title4[lg],
-      text: translationData?.translated_output.text4[lg],
-      link: "https://www.visittabor.eu/kalendar-akci",
-    },
-  ]
+  const link4 = () => {
+    window.location.href = "https://www.visittabor.eu/kalendar-akci"
+  }
+
+  const renderSkeletons = () => {
+    return <div className='skeleton'></div>
+  }
 
   return (
     <div className='aktivityPage'>
-      {cards.map((card, index) => (
-        <Card
-          key={index}
-          title={card.title}
-          imageUrl={card.imageUrl}
-          text={card.text}
-          link={card.link}
-        />
-      ))}
+      <div className='row'>
+        <div className='column'>
+          <div className='aktivityContent'>
+            <h1>{translationData?.translated_output.title1[lg] || "Vylety"}</h1>
+            <p>{translationData?.translated_output.text1[lg]}</p>
+            <button onClick={link1} className='linkButton'>
+              Navstivit stranku
+            </button>
+          </div>
+        </div>
+        <div className='column'>
+          <img className='imageCardImage' onClick={link1} src={aktivityPictures[0]}></img>
+        </div>
+      </div>
+      <div className='row'>
+        <div className='column'>
+          {isLoading ? (
+            renderSkeletons()
+          ) : (
+            <img className='imageCardImage' onClick={link2} src={aktivityPictures[1]}></img>
+          )}
+        </div>
+        <div className='column'>
+          <div className='aktivityContent'>
+            <h1>{translationData?.translated_output.title2[lg] || "Koupani"}</h1>
+            <p>{translationData?.translated_output.text2[lg]}</p>
+            <button onClick={link2} className='linkButton'>
+              Navstivit stranku
+            </button>
+          </div>
+        </div>
+      </div>
+      <div className='row'>
+        <div className='column'>
+          <div className='aktivityContent'>
+            <h1>{translationData?.translated_output.title3[lg] || "Tenis"}</h1>
+            <p>{translationData?.translated_output.text3[lg]}</p>
+            <button onClick={link3} className='linkButton'>
+              Navstivit stranku
+            </button>
+          </div>
+        </div>
+        <div className='column'>
+          {isLoading ? (
+            renderSkeletons()
+          ) : (
+            <img className='imageCardImage' onClick={link3} src={aktivityPictures[2]}></img>
+          )}
+        </div>
+      </div>
+      <div className='row'>
+        <div className='column'>
+          {isLoading ? (
+            renderSkeletons()
+          ) : (
+            <img className='imageCardImage' onClick={link4} src={aktivityPictures[3]}></img>
+          )}
+        </div>
+        <div className='column'>
+          <div className='aktivityContent'>
+            <h1>{translationData?.translated_output.title4[lg] || "Akce"}</h1>
+            <p>{translationData?.translated_output.text4[lg]}</p>
+            <button onClick={link4} className='linkButton'>
+              Navstivit stranku
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

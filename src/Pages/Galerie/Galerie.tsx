@@ -19,28 +19,16 @@ export interface Picture {
 
 const Galerie: FC = () => {
   const [translationData, setTranslationData] = useState<DocumentData>()
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const fetchedTranslation = await getGalerieTranslated()
-      setTranslationData(fetchedTranslation)
-      console.log(fetchedTranslation)
-    }
-    fetchData()
-  }, [])
-
-  const { lg } = useSelector((state: RootState) => {
-    return state.language
-  })
-
   const [pictures, setPictures] = useState<Picture[]>([])
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true)
       const fetchedHomePagePictures = await getPicturesHomePage()
       const fetchedSvatbyPictures = await getPicturesSvatby()
       const fetchedUbytovaniPictures = await getPicturesUbytovani()
-
+      const fetchedTranslation = await getGalerieTranslated()
       const allPictures = [
         ...fetchedHomePagePictures.map((src) => ({ src, folder: "homePage" })),
         ...fetchedUbytovaniPictures.map((src) => ({ src, folder: "ubytovani" })),
@@ -51,46 +39,62 @@ const Galerie: FC = () => {
         ...picture,
         id: index,
       }))
-
+      setTranslationData(fetchedTranslation)
       setPictures(picturesWithId)
+      setIsLoading(false)
     }
-
     fetchData()
   }, [])
 
+  const { lg } = useSelector((state: RootState) => {
+    return state.language
+  })
+
+  const renderSkeletons = () => {
+    return [...Array(5)].map((_, index) => <div key={index} className='gallerySkeleton'></div>)
+  }
+
   return (
-    <div>
-      <div className='galerieHeader'>
-        <h1>{translationData?.translated_output.Penzion[lg]}</h1>
-      </div>
-      <div className='galeryStructure'>
-        {pictures
-          .filter((picture) => picture.folder === "homePage")
-          .map((picture, index) => (
-            <ImageCard key={`homePage-${index}`} id={picture.id} pictures={pictures} />
-          ))}
+    <>
+      <div className='galerieContainer'>
         <div className='galerieHeader'>
-          <h1>{translationData?.translated_output.Ubytovani[lg]}</h1>
+          <h1>{translationData?.translated_output.Penzion[lg] || "Penzion"}</h1>
         </div>
         <div className='galeryStructure'>
-          {pictures
-            .filter((picture) => picture.folder === "ubytovani")
-            .map((picture, index) => (
-              <ImageCard key={`ubytovani-${index}`} id={picture.id} pictures={pictures} />
-            ))}
+          {isLoading
+            ? renderSkeletons()
+            : pictures
+                .filter((picture) => picture.folder === "homePage")
+                .map((picture, index) => (
+                  <ImageCard key={`homePage-${index}`} id={picture.id} pictures={pictures} />
+                ))}
+        </div>
+        <div className='galerieHeader'>
+          <h1>{translationData?.translated_output.Ubytovani[lg] || "Ubytování"}</h1>
+        </div>
+        <div className='galeryStructure'>
+          {isLoading
+            ? renderSkeletons()
+            : pictures
+                .filter((picture) => picture.folder === "ubytovani")
+                .map((picture, index) => (
+                  <ImageCard key={`ubytovani-${index}`} id={picture.id} pictures={pictures} />
+                ))}
         </div>
         <div className='galerieHeader'>
           <h1>{translationData?.translated_output.Svatby[lg]}</h1>
         </div>
         <div className='galeryStructure'>
-          {pictures
-            .filter((picture) => picture.folder === "svatby")
-            .map((picture, index) => (
-              <ImageCard key={`svatby-${index}`} id={picture.id} pictures={pictures} />
-            ))}
+          {isLoading
+            ? renderSkeletons()
+            : pictures
+                .filter((picture) => picture.folder === "svatby")
+                .map((picture, index) => (
+                  <ImageCard key={`svatby-${index}`} id={picture.id} pictures={pictures} />
+                ))}
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

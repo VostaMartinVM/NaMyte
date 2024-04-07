@@ -19,11 +19,81 @@ a {
   padding: 20px;
 }
 
+.skeletonText {
+  width: 100%;
+  height: 0.5rem;
+  margin-bottom: 0.25rem;
+  border-radius: 0.125rem;
+}
+
+.skeleton-text:last-child {
+  margin-bottom: 0;
+  width: 80%;
+}
+
+@keyframes skeletonLoading {
+  0% {
+    background-color: hsl(200, 20%, 70);
+  }
+
+  100% {
+    background-color: hsl(200, 20%, 95%);
+  }
+}
+
+.siteBackground {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  background-color: bisque;
+  backdrop-filter: blur(5px);
+  align-items: center;
+  justify-content: space-between;
+}
+
 .pageContainer {
   display: flex;
-  width: 100%;
-  height: 100%;
-  margin-left: 360px;
+  width: 70%;
+  height: 90%;
   align-items: center;
   justify-content: center;
+  margin-right: 20px;
+  border-radius: 20px;
+  background-color: rgba(229, 175, 97, 0.7);
+  padding: 1%;
+  overflow-y: scroll;
+  position: relative;
+}
+
+.pageContainer::-webkit-scrollbar {
+  display: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow-y: scroll;
+}
+
+.containerNavbar {
+  display: flex;
+  justify-content: center;
+  height: 90%;
+  align-items: center;
+  background-position: center;
+  background-size: cover;
+  width: 20%;
+  min-width: 360px;
+  background-color: rgba(229, 175, 97, 0.7);
+  border-radius: 0 20px 20px 0;
+}
+
+.scrollButton {
+  position: fixed;
+  bottom: 60px;
+  right: 40px;
+  color: black;
+  cursor: pointer;
+
+  .icon {
+    width: 36px;
+    height: 36px;
+  }
 }

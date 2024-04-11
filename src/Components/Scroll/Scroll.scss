@@ -1,0 +1,12 @@
+.scrollButton {
+  position: fixed;
+  bottom: 60px;
+  right: 40px;
+  color: black;
+  cursor: pointer;
+
+  .icon {
+    width: 36px;
+    height: 36px;
+  }
+}

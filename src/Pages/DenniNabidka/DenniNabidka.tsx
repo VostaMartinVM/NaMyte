@@ -3,7 +3,7 @@ import { Link, Outlet } from "react-router-dom"
 import "./DenniNabidka.scss"
 import { useSelector } from "react-redux"
 import { RootState } from "../../Redux/store"
-import { getNabidkaJidelTranslated } from "../../firebaseApi"
+import { getJidelniListekTranslated } from "../../firebaseApi"
 import { DocumentData } from "firebase/firestore"
 
 const DenniNabidka: FC = () => {
@@ -11,7 +11,7 @@ const DenniNabidka: FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const fetchedTranslation = await getNabidkaJidelTranslated()
+      const fetchedTranslation = await getJidelniListekTranslated()
       setTranslationData(fetchedTranslation)
       console.log(fetchedTranslation)
     }

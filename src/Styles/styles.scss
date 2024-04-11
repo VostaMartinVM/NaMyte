@@ -33,11 +33,11 @@ a {
 
 @keyframes skeletonLoading {
   0% {
-    background-color: hsl(200, 20%, 70);
+    background-color: rgba(255, 255, 255, 0.7);
   }
 
   100% {
-    background-color: hsl(200, 20%, 95%);
+    background-color: rgb(255, 218, 172);
   }
 }
 
@@ -83,17 +83,4 @@ a {
   min-width: 360px;
   background-color: rgba(229, 175, 97, 0.7);
   border-radius: 0 20px 20px 0;
-}
-
-.scrollButton {
-  position: fixed;
-  bottom: 60px;
-  right: 40px;
-  color: black;
-  cursor: pointer;
-
-  .icon {
-    width: 36px;
-    height: 36px;
-  }
 }

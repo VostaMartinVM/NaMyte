@@ -13,16 +13,17 @@ export const getHomePageTranslated = async () => {
   return TranDataHomePage
 }
 
-export const getNabidkaJidelTranslated = async () => {
+export const getJidelniListekTranslated = async () => {
   let TranslatedNabidkaJidel
   ;(await db.collection("translation_collection_path").get()).forEach((doc) => {
-    if (doc.id === "nabidkaJidelPageMenu") {
+    if (doc.id === "jidelniListek") {
       TranslatedNabidkaJidel = doc.data()
     }
   })
 
   return TranslatedNabidkaJidel
 }
+
 export const getNavbarTranslated = async () => {
   let TranslatedNavbar = undefined
   ;(await db.collection("translation_collection_path").get()).forEach((doc) => {

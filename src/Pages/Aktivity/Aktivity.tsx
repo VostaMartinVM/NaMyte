@@ -49,7 +49,7 @@ const Aktivity: FC = () => {
   return (
     <div className='aktivityPage'>
       <div className='row'>
-        <div className='column'>
+        <div className='aktivityColumn'>
           <div className='aktivityContent'>
             <h1>{translationData?.translated_output.title1[lg] || "Vylety"}</h1>
             <p>{translationData?.translated_output.text1[lg]}</p>
@@ -58,19 +58,23 @@ const Aktivity: FC = () => {
             </button>
           </div>
         </div>
-        <div className='column'>
-          <img className='imageCardImage' onClick={link1} src={aktivityPictures[0]}></img>
+        <div className='aktivityColumn'>
+          {isLoading ? (
+            renderSkeletons()
+          ) : (
+            <img className='imageCardImage' onClick={link1} src={aktivityPictures[0]}></img>
+          )}
         </div>
       </div>
       <div className='row'>
-        <div className='column'>
+        <div className='aktivityColumn'>
           {isLoading ? (
             renderSkeletons()
           ) : (
             <img className='imageCardImage' onClick={link2} src={aktivityPictures[1]}></img>
           )}
         </div>
-        <div className='column'>
+        <div className='aktivityColumn'>
           <div className='aktivityContent'>
             <h1>{translationData?.translated_output.title2[lg] || "Koupani"}</h1>
             <p>{translationData?.translated_output.text2[lg]}</p>
@@ -81,7 +85,7 @@ const Aktivity: FC = () => {
         </div>
       </div>
       <div className='row'>
-        <div className='column'>
+        <div className='aktivityColumn'>
           <div className='aktivityContent'>
             <h1>{translationData?.translated_output.title3[lg] || "Tenis"}</h1>
             <p>{translationData?.translated_output.text3[lg]}</p>
@@ -90,7 +94,7 @@ const Aktivity: FC = () => {
             </button>
           </div>
         </div>
-        <div className='column'>
+        <div className='aktivityColumn'>
           {isLoading ? (
             renderSkeletons()
           ) : (
@@ -99,14 +103,14 @@ const Aktivity: FC = () => {
         </div>
       </div>
       <div className='row'>
-        <div className='column'>
+        <div className='aktivityColumn'>
           {isLoading ? (
             renderSkeletons()
           ) : (
             <img className='imageCardImage' onClick={link4} src={aktivityPictures[3]}></img>
           )}
         </div>
-        <div className='column'>
+        <div className='aktivityColumn'>
           <div className='aktivityContent'>
             <h1>{translationData?.translated_output.title4[lg] || "Akce"}</h1>
             <p>{translationData?.translated_output.text4[lg]}</p>

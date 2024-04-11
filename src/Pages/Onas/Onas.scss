@@ -1,7 +1,8 @@
 .row {
   display: flex;
   flex-direction: row;
-  align-items: start;
+  align-items: center;
+  margin-top: 50px;
 }
 
 .oNasColumn {
@@ -19,6 +20,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  border: black solid 1px;
 }
 
 .sneaky {
@@ -37,4 +39,11 @@
     font-weight: 700;
     font-size: 36px;
   }
+}
+
+.mapSkeleton {
+  width: 600px;
+  height: 450px;
+  opacity: 0.3;
+  animation: skeletonLoading 1s linear infinite alternate;
 }

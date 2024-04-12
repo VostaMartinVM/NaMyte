@@ -17,9 +17,7 @@ const App = () => {
         <PersistGate loading={null} persistor={persistor}>
           <div className='siteBackground'>
             <Navbar />
-            <div id='pageContainer' className='pageContainer'>
-              <Outlet />
-            </div>
+            <Outlet />
             <Scroll />
           </div>
         </PersistGate>

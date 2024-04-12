@@ -10,6 +10,7 @@ import "./Galerie.scss"
 import { useSelector } from "react-redux"
 import { RootState } from "../../Redux/store"
 import { DocumentData } from "firebase/firestore"
+import AnimatedWrapper from "../../Components/AnimatedWrapper/AnimatedWrapper"
 
 export interface Picture {
   id: number
@@ -55,7 +56,7 @@ const Galerie: FC = () => {
   }
 
   return (
-    <>
+    <AnimatedWrapper>
       <div className='galerieContainer'>
         <div className='galerieHeader'>
           <h1>{translationData?.translated_output.Penzion[lg] || "Penzion"}</h1>
@@ -94,7 +95,7 @@ const Galerie: FC = () => {
                 ))}
         </div>
       </div>
-    </>
+    </AnimatedWrapper>
   )
 }
 

@@ -4,6 +4,7 @@ import { getJidelniListekTranslated, getPicturesJidelniListek } from "../../fire
 import { DocumentData } from "firebase/firestore"
 import { useSelector } from "react-redux"
 import { RootState } from "../../Redux/store"
+import AnimatedWrapper from "../../Components/AnimatedWrapper/AnimatedWrapper"
 
 type DataValue = {
   [key: string]: string
@@ -118,7 +119,9 @@ const NabidkaJidel: FC = () => {
   }
 
   return (
-    <div className='nabidkaJidelPage'>{isLoading ? renderSkeletons() : renderHeaderItems()}</div>
+    <AnimatedWrapper>
+      <div className='nabidkaJidelPage'>{isLoading ? renderSkeletons() : renderHeaderItems()}</div>
+    </AnimatedWrapper>
   )
 }
 

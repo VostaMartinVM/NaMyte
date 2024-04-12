@@ -5,6 +5,7 @@ import { DocumentData } from "firebase/firestore"
 import ImageSlider from "../../Components/ImageSlider/ImageSlider"
 import { RootState } from "../../Redux/store"
 import { useSelector } from "react-redux"
+import AnimatedWrapper from "../../Components/AnimatedWrapper/AnimatedWrapper"
 
 const Home: FC = () => {
   const [translationData, setTranslationData] = useState<DocumentData>()
@@ -26,19 +27,21 @@ const Home: FC = () => {
   })
 
   return (
-    <div className='home'>
-      <div className='containerStyles'>
-        <ImageSlider pictures={homePagePictures} styling='homeImageCard' />
-      </div>
-      <div className='text-container'>
-        <div className='homeHeader'>
-          <h1>{translationData ? translationData.translated_output.header[lg] : "Home"}</h1>
+    <AnimatedWrapper>
+      <div className='home'>
+        <div className='containerStyles'>
+          <ImageSlider pictures={homePagePictures} styling='homeImageCard' />
         </div>
-        <div className='text'>
-          <p>{translationData?.translated_output.introduction[lg]} </p>
+        <div className='text-container'>
+          <div className='homeHeader'>
+            <h1>{translationData ? translationData.translated_output.header[lg] : "Home"}</h1>
+          </div>
+          <div className='text'>
+            <p>{translationData?.translated_output.introduction[lg]} </p>
+          </div>
         </div>
       </div>
-    </div>
+    </AnimatedWrapper>
   )
 }
 

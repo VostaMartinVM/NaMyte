@@ -5,6 +5,7 @@ import { useSelector } from "react-redux"
 import { RootState } from "../../Redux/store"
 import { getJidelniListekTranslated } from "../../firebaseApi"
 import { DocumentData } from "firebase/firestore"
+import AnimatedWrapper from "../../Components/AnimatedWrapper/AnimatedWrapper"
 
 const DenniNabidka: FC = () => {
   const [translationData, setTranslationData] = useState<DocumentData>()
@@ -23,11 +24,13 @@ const DenniNabidka: FC = () => {
   })
 
   return (
-    <div className='nabidkaJidel'>
-      <div className='homeHeader'>
-        <h1>Home</h1>
+    <AnimatedWrapper>
+      <div className='nabidkaJidel'>
+        <div className='homeHeader'>
+          <h1>Home</h1>
+        </div>
       </div>
-    </div>
+    </AnimatedWrapper>
   )
 }
 export default DenniNabidka

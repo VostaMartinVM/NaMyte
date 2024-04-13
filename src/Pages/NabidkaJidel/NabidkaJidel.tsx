@@ -105,43 +105,46 @@ const NabidkaJidel: FC = () => {
   const renderMenuItems = (headerValue: string, headerIndex: number) => {
     if (!translationData) return null
 
-    return Object.entries(translationData.translated_output)
-      .filter(([key]) => key.startsWith(headerValue))
-      .map(([menuKey, menuValue], index) => {
-        const image = jidelniListekPictures.find((picture) => picture.name === "Predkrm1.jpg")
+    const menuKeys = Object.keys(translationData.translated_output)
+      .filter((key) => key.startsWith(headerValue))
+      .sort() // Sort menu keys alphabetically
 
-        return (
-          <div key={menuKey} className='nabidkaJidelRow'>
-            {index % 2 === headerIndex % 2 ? (
-              <>
-                <div className='nabidkaJidelColumn'>
-                  <h2>{(menuValue as DataValue)[lg]}</h2>
-                </div>
-                <div className='nabidkaJidelColumn'>
-                  <img
-                    className='imageCardImage'
-                    src={image ? image.url : undefined}
-                    alt={menuKey}
-                  ></img>
-                </div>
-              </>
-            ) : (
-              <>
-                <div className='nabidkaJidelColumn'>
-                  <img
-                    className='imageCardImage'
-                    src={image ? image.url : undefined}
-                    alt={menuKey}
-                  ></img>
-                </div>
-                <div className='nabidkaJidelColumn'>
-                  <h2>{(menuValue as DataValue)[lg]}</h2>
-                </div>
-              </>
-            )}
-          </div>
-        )
-      })
+    return menuKeys.map((menuKey, index) => {
+      const menuValue = translationData.translated_output[menuKey]
+      const image = jidelniListekPictures.find((picture) => picture.name === `${menuKey}.jpg`)
+
+      return (
+        <div key={menuKey} className='nabidkaJidelRow'>
+          {index % 2 === headerIndex % 2 ? (
+            <>
+              <div className='nabidkaJidelColumn'>
+                <h2>{(menuValue as DataValue)[lg]}</h2>
+              </div>
+              <div className='nabidkaJidelColumn'>
+                <img
+                  className='imageCardImage'
+                  src={image ? image.url : undefined}
+                  alt={menuKey}
+                ></img>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className='nabidkaJidelColumn'>
+                <img
+                  className='imageCardImage'
+                  src={image ? image.url : undefined}
+                  alt={menuKey}
+                ></img>
+              </div>
+              <div className='nabidkaJidelColumn'>
+                <h2>{(menuValue as DataValue)[lg]}</h2>
+              </div>
+            </>
+          )}
+        </div>
+      )
+    })
   }
 
   return (

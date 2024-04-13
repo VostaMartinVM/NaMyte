@@ -1,6 +1,5 @@
 import { useState } from "react"
 import Navbar from "./Components/Navbar/Navbar"
-import Scroll from "./Components/Scroll/Scroll"
 import { Route, Routes, useLocation } from "react-router-dom"
 import { Provider } from "react-redux"
 import store from "./Redux/store"

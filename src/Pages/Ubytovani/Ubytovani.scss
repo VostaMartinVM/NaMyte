@@ -15,8 +15,23 @@
 
 .ubytovaniImgContainer {
   width: 100%;
-  height: 55vh;
+  height: 50vh;
   padding: 20px;
+}
+
+.ubytovaniHeader {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 20px;
+
+  h1 {
+    text-align: center;
+    font-weight: 700;
+    font-size: 36px;
+    border-bottom: black solid 2px;
+  }
 }
 
 .roomImageSlider {

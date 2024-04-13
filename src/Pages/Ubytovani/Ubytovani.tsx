@@ -16,11 +16,15 @@ const Ubytovani: FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true)
-      const fetchedPictures = await getPicturesUbytovani()
-      const translatedUbytovani = await getUbytovaniPageMenuTranslated()
-      setUbytovaniPictures(fetchedPictures)
-      setTranslationData(translatedUbytovani)
-      setIsLoading(false)
+      try {
+        const fetchedPictures = await getPicturesUbytovani()
+        const translatedUbytovani = await getUbytovaniPageMenuTranslated()
+        setUbytovaniPictures(fetchedPictures)
+        setTranslationData(translatedUbytovani)
+      } catch (error) {
+        console.error("Error fetching data:", error)
+        setIsLoading(false)
+      }
     }
     fetchData()
   }, [])
@@ -29,18 +33,14 @@ const Ubytovani: FC = () => {
     return state.language
   })
 
-  const booking = () => {
-    window.location.href = "https://www.booking.com/Share-V7jHm6B"
-  }
-
   return (
     <AnimatedWrapper>
       <div className='ubytovaniContainer'>
         <div className='ubytovaniImgContainer'>
           <ImageSlider pictures={ubytovaniPictures} styling='roomImageSlider'></ImageSlider>
         </div>
-        <div>
-          <h1> {translationData ? translationData?.translated_output.header1[lg] : "Ubytování"}</h1>
+        <div className='ubytovaniHeader'>
+          <h1>{translationData ? translationData?.translated_output.header1[lg] : "Ubytování"}</h1>
         </div>
         {isLoading ? (
           <div>
@@ -80,7 +80,9 @@ const Ubytovani: FC = () => {
         )}
 
         <div className='booking'>
-          <TbBrandBooking onClick={booking} className='icon' />
+          <a href='https://www.booking.com/Share-V7jHm6B' target='_blank' rel='noopener noreferrer'>
+            <TbBrandBooking className='icon' />
+          </a>
         </div>
       </div>
     </AnimatedWrapper>

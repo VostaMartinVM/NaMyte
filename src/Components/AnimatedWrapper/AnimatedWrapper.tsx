@@ -3,9 +3,9 @@ import PropTypes from "prop-types"
 import "./AnimatedWrapper.scss"
 
 const animations = {
-  initial: { opacity: 0, y: 100 },
+  initial: { opacity: 0, y: "100%" },
   animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -100 },
+  exit: { opacity: 0, y: "-100%" },
 }
 
 interface AnimatedWrapperProps {

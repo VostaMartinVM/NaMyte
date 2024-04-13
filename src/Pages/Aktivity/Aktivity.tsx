@@ -35,25 +35,15 @@ const Aktivity: FC = () => {
   const getLinkFunction = (index: number) => {
     switch (index) {
       case 0:
-        return () => {
-          window.location.href = "https://www.visittabor.eu/co-delat-v-tabore"
-        }
+        return "https://www.visittabor.eu/co-delat-v-tabore"
       case 1:
-        return () => {
-          window.location.href = "https://www.koupalistepohoda.cz"
-        }
+        return "https://www.koupalistepohoda.cz"
       case 2:
-        return () => {
-          window.location.href = "https://tenissezimak.cz"
-        }
+        return "https://tenissezimak.cz"
       case 3:
-        return () => {
-          window.location.href = "https://www.visittabor.eu/kalendar-akci"
-        }
+        return "https://www.visittabor.eu/kalendar-akci"
       default:
-        return () => {
-          window.location.href = "https://tenissezimak.cz"
-        }
+        return "https://tenissezimak.cz"
     }
   }
 
@@ -66,12 +56,17 @@ const Aktivity: FC = () => {
       return renderSkeletons()
     }
     return (
-      <img
-        className='imageCardImage'
-        onClick={getLinkFunction(index)}
-        src={aktivityPictures[index]}
-        alt={`Aktivity ${index}`}
-      />
+      <a href={getLinkFunction(index)} target='_blank' rel='noopener noreferrer'>
+        <img src={aktivityPictures[index]} alt={`Aktivity ${index}`} />
+      </a>
+    )
+  }
+
+  const renderButton = (index: number) => {
+    return (
+      <a href={getLinkFunction(index)} target='_blank' rel='noopener noreferrer'>
+        <button className='linkButton'>Navstivit stranku</button>
+      </a>
     )
   }
 
@@ -90,9 +85,7 @@ const Aktivity: FC = () => {
                         "Default Title"}
                     </h1>
                     <p>{translationData?.translated_output[`text${index + 1}`]?.[lg]}</p>
-                    <button onClick={getLinkFunction(index)} className='linkButton'>
-                      Navstivit stranku
-                    </button>
+                    {renderButton(index)}
                   </div>
                 </div>
               </>
@@ -105,9 +98,7 @@ const Aktivity: FC = () => {
                         "Default Title"}
                     </h1>
                     <p>{translationData?.translated_output[`text${index + 1}`]?.[lg]}</p>
-                    <button onClick={getLinkFunction(index)} className='linkButton'>
-                      Navstivit stranku
-                    </button>
+                    {renderButton(index)}
                   </div>
                 </div>
                 <div className='aktivityColumn'>{renderImage(index)}</div>

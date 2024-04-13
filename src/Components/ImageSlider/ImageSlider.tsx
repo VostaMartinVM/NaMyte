@@ -39,6 +39,10 @@ const ImageSliderPopup: FC<props> = ({ pictures, styling }) => {
     setCurrentIndex(slideIndex)
   }
 
+  const imgSkeleton = () => {
+    return <div className='skeletonImgSlider'></div>
+  }
+
   return (
     <div className={styling}>
       <div className='arrowContainer'>
@@ -50,7 +54,7 @@ const ImageSliderPopup: FC<props> = ({ pictures, styling }) => {
         </div>
       </div>
       <div className='sliderStyles'>
-        <img className='sliderImage' src={currentImg}></img>
+        {currentImg ? <img className='sliderImage' src={currentImg}></img> : imgSkeleton()}
       </div>
       <div className='dotContainerStyle'>
         {pictures &&
@@ -65,7 +69,7 @@ const ImageSliderPopup: FC<props> = ({ pictures, styling }) => {
               ●
             </div>
           ))}
-        {!currentImg && <div>Loading image...</div>}
+        {!currentImg && <div>Image not found</div>}
       </div>
     </div>
   )

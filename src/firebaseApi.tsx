@@ -82,14 +82,6 @@ export const getPicturesHomePage = async () => {
   return Promise.all(urlPromises)
 }
 
-export const getPicturesLogo = async () => {
-  const listRef = ref(storage, "Logo/")
-  const refs = await listAll(listRef)
-
-  const urlPromises = refs.items.map((imageRef) => getDownloadURL(imageRef))
-  return Promise.all(urlPromises)
-}
-
 export const getPicturesDenniMenu = async () => {
   const listRef = ref(storage, "DenniMenu/")
   const refs = await listAll(listRef)

@@ -27,19 +27,23 @@ const NabidkaJidel: FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true)
-      const fetchedTranslation = await getJidelniListekTranslated()
-      const fetchedPictureUrls = await getPicturesJidelniListek()
-      const fetchedPictures = fetchedPictureUrls.map((url) => {
-        const decodedUrl = decodeURIComponent(url)
-        const segments = decodedUrl.split("/")
-        const lastSegment = segments.pop()
-        const name = lastSegment ? lastSegment.split("?")[0] : undefined
-        return { name, url }
-      })
-      setJidelniListekPictures(fetchedPictures)
-      setTranslationData(fetchedTranslation)
-      setIsLoading(false)
-      console.log(jidelniListekPictures)
+      try {
+        const fetchedTranslation = await getJidelniListekTranslated()
+        const fetchedPictureUrls = await getPicturesJidelniListek()
+        const fetchedPictures = fetchedPictureUrls.map((url) => {
+          const decodedUrl = decodeURIComponent(url)
+          const segments = decodedUrl.split("/")
+          const lastSegment = segments.pop()
+          const name = lastSegment ? lastSegment.split("?")[0] : undefined
+          return { name, url }
+        })
+        setJidelniListekPictures(fetchedPictures)
+        setTranslationData(fetchedTranslation)
+        setIsLoading(false)
+      } catch (error) {
+        console.error("Error fetching data:", error)
+        setIsLoading(false)
+      }
     }
     fetchData()
   }, [])
@@ -68,11 +72,11 @@ const NabidkaJidel: FC = () => {
         </div>
         {[...Array(5)].map((_, index) => (
           <div key={index} className='nabidkaJidelRow'>
-            <div className='nabidkaJidelColumn'>
+            <div className='nabidkaJidelSkeleton'>
               <div className='skeletonText'></div>
               <div className='skeletonText'></div>
             </div>
-            <div key={index} className='nabidkaJidelColumn'>
+            <div key={index} className='nabidkaJidelSkeleton'>
               <div className='skeletonImg'></div>
             </div>
           </div>
@@ -84,7 +88,7 @@ const NabidkaJidel: FC = () => {
   const renderHeaderItems = () => {
     if (!translationData) return null
 
-    return headerArray.map(([headerKey, headerValue]) => {
+    return headerArray.map(([headerKey, headerValue], headerIndex) => {
       const translationValue = translationData.translated_output[headerKey]
 
       return (
@@ -92,27 +96,49 @@ const NabidkaJidel: FC = () => {
           <div className='nabidkaJidelHeader'>
             <h1>{(translationValue as TranslationValue)[lg]} </h1>
           </div>
-          {renderMenuItems(headerValue)}
+          {renderMenuItems(headerValue, headerIndex)}
         </div>
       )
     })
   }
 
-  const renderMenuItems = (headerValue: string) => {
+  const renderMenuItems = (headerValue: string, headerIndex: number) => {
     if (!translationData) return null
 
     return Object.entries(translationData.translated_output)
       .filter(([key]) => key.startsWith(headerValue))
-      .map(([menuKey, menuValue]) => {
+      .map(([menuKey, menuValue], index) => {
         const image = jidelniListekPictures.find((picture) => picture.name === "Predkrm1.jpg")
+
         return (
           <div key={menuKey} className='nabidkaJidelRow'>
-            <div className='nabidkaJidelColumn'>
-              <h2>{(menuValue as DataValue)[lg]}</h2>
-            </div>
-            <div className='nabidkaJidelColumn'>
-              <img className='imageCardImage' src={image ? image.url : undefined}></img>
-            </div>
+            {index % 2 === headerIndex % 2 ? (
+              <>
+                <div className='nabidkaJidelColumn'>
+                  <h2>{(menuValue as DataValue)[lg]}</h2>
+                </div>
+                <div className='nabidkaJidelColumn'>
+                  <img
+                    className='imageCardImage'
+                    src={image ? image.url : undefined}
+                    alt={menuKey}
+                  ></img>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className='nabidkaJidelColumn'>
+                  <img
+                    className='imageCardImage'
+                    src={image ? image.url : undefined}
+                    alt={menuKey}
+                  ></img>
+                </div>
+                <div className='nabidkaJidelColumn'>
+                  <h2>{(menuValue as DataValue)[lg]}</h2>
+                </div>
+              </>
+            )}
           </div>
         )
       })

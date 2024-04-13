@@ -1,6 +1,5 @@
-import React, { FC } from "react"
+import { FC } from "react"
 import "./Card.scss"
-import { CardImage } from "./CardImage"
 
 type CardProps = {
   title: string
@@ -9,20 +8,25 @@ type CardProps = {
   link: string
 }
 
+type CardImage = {
+  url: string
+  title: string
+}
+
 const Card: FC<CardProps> = ({ title, imageUrl, text, link }) => {
   const HandleOnClick = () => {
     window.location.href = link
   }
   return (
-    <div className='card-container' onClick={HandleOnClick}>
-      <div className='image-container'>
+    <div className='cardContainer' onClick={HandleOnClick}>
+      <div className='imageContainer'>
         <img src={imageUrl.url} alt={imageUrl.url}></img>
       </div>
-      <div className='card-content'>
-        <div className='card-title'>
+      <div className='cardContent'>
+        <div className='cardCitle'>
           <h3>{title}</h3>
         </div>
-        <div className='card-body'>{text}</div>
+        <div className='cardCody'>{text}</div>
       </div>
     </div>
   )

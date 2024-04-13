@@ -1,9 +1,9 @@
-import React, { FC, useEffect, useState } from "react"
-import "./Onas.scss"
+import { FC, useEffect, useState } from "react"
 import { DocumentData } from "@firebase/firestore-types"
 import { getOnasTranslated } from "../../firebaseApi"
 import { useSelector } from "react-redux"
 import { RootState } from "../../Redux/store"
+import "./Onas.scss"
 import AnimatedWrapper from "../../Components/AnimatedWrapper/AnimatedWrapper"
 
 const Onas: FC = () => {
@@ -27,7 +27,7 @@ const Onas: FC = () => {
   return (
     <AnimatedWrapper>
       <div className='oNasPage'>
-        <div className='homeHeader'>
+        <div>
           {isLoading ? (
             <h1>{translationData?.translated_output.h1[lg]}</h1>
           ) : (
@@ -35,7 +35,7 @@ const Onas: FC = () => {
           )}
           <h1></h1>
         </div>
-        <div className='row'>
+        <div className='oNasRow'>
           <div className='oNasColumn'>
             {isLoading ? (
               <div className='map'>
@@ -57,7 +57,7 @@ const Onas: FC = () => {
           <div className='oNasColumn'>
             {isLoading ? (
               <div>
-                <div className='header'>
+                <div className='oNasBody'>
                   <p>
                     Na Mýtě 123
                     <br />
@@ -88,7 +88,7 @@ const Onas: FC = () => {
               </div>
             ) : (
               <div>
-                <div className='header'>
+                <div className='oNasBody'>
                   <p>
                     Na Mýtě 123
                     <br />

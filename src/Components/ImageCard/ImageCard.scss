@@ -1,4 +1,4 @@
-.imagecard-container {
+.imagecardContainer {
   width: 250px;
   height: 170px;
   overflow: hidden;
@@ -11,7 +11,7 @@
   margin: 20px;
 }
 
-.imagecard-container:hover {
+.imagecardContainer:hover {
   transform: scale(1.1);
   box-shadow: 0px 0px 15px 3px;
 }
@@ -22,20 +22,8 @@
   height: 100%;
 }
 
-.imageCardSlider {
-  width: 100%;
-  height: 100%;
-}
-
-body.active-modal {
-  overflow-y: hidden;
-}
-
-.btn-modal {
-  padding: 10px 20px;
-  display: block;
-  margin: 100px auto 0;
-  font-size: 18px;
+.overlay {
+  background: rgba(49, 49, 49, 0.8);
 }
 
 .modal,
@@ -50,11 +38,7 @@ body.active-modal {
   z-index: 10;
 }
 
-.overlay {
-  background: rgba(49, 49, 49, 0.8);
-}
-
-.modal-content {
+.modalContent {
   position: absolute;
   top: 40%;
   left: 50%;

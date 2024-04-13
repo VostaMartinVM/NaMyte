@@ -1,7 +1,8 @@
-import React, { ChangeEvent, FC, useRef, useState } from "react"
+import { ChangeEvent, FC, useRef, useState } from "react"
 import { auth } from "../../firebase"
 import { useNavigate } from "react-router-dom"
 import { uploadPdf } from "../../firebaseApi"
+import "./Admin.scss"
 
 const Admin: FC = () => {
   const navigate = useNavigate()

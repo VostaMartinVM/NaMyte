@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react"
+import { FC, useEffect, useState } from "react"
 import "./ImageSliderPopup.scss"
 import { Picture } from "../../Pages/Galerie/Galerie"
 

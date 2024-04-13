@@ -1,4 +1,4 @@
-.card-container {
+.cardContainer {
   width: 400px;
   height: 300px;
   overflow: hidden;
@@ -10,20 +10,20 @@
   border-color: black;
 }
 
-.card-container:hover {
+.cardContainer:hover {
   transform: scale(1.1);
   box-shadow: 0px 0px 15px 3px;
 }
 
-.image-container img {
-  overflow: hidden;
-  height: 200px;
-}
-
-.card-content {
+.cardContent {
   padding: 10px;
 }
 
-.card-title {
+.cardTitle {
   padding-bottom: 10px;
+}
+
+.imageContainer img {
+  overflow: hidden;
+  height: 200px;
 }

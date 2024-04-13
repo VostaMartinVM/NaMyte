@@ -1,22 +1,28 @@
-import { IoIosArrowDropup, IoIosArrowDropdown } from "react-icons/io"
 import { useEffect, useState } from "react"
 import "./Scroll.scss"
+import { IoIosArrowDropup, IoIosArrowDropdown } from "react-icons/io"
 
 const Scroll = () => {
-  const [isTop, setIsTop] = useState(false)
+  const [isTop, setIsTop] = useState(true)
   const scrolObj = document.getElementById("pageContainer")
 
   useEffect(() => {
-    scrolObj?.addEventListener("scroll", () => {
-      if (scrolObj.scrollTop != scrolObj.scrollHeight - scrolObj.offsetHeight) {
-        setIsTop(true)
-      } else {
-        setIsTop(false)
+    const handleScroll = () => {
+      if (scrolObj) {
+        setIsTop(scrolObj.scrollTop === 0)
       }
-    })
-  })
+    }
 
-  const scrollUP = () => {
+    scrolObj?.addEventListener("scroll", handleScroll)
+
+    return () => {
+      if (scrolObj) {
+        scrolObj.removeEventListener("scroll", handleScroll)
+      }
+    }
+  }, [])
+
+  const scrollUp = () => {
     if (scrolObj) {
       scrolObj.scroll({ top: 0, behavior: "smooth" })
     }
@@ -29,7 +35,7 @@ const Scroll = () => {
   }
 
   return (
-    <div onClick={isTop ? scrollDown : scrollUP} className='scrollButton'>
+    <div onClick={isTop ? scrollDown : scrollUp} className='scrollButton'>
       {isTop ? <IoIosArrowDropdown className='icon' /> : <IoIosArrowDropup className='icon' />}
     </div>
   )

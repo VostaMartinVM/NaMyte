@@ -1,8 +1,8 @@
-import React, { ChangeEvent, FC, useState } from "react"
-import "./Login.scss"
+import { ChangeEvent, FC, useState } from "react"
 import { auth } from "../../firebase"
 import { useNavigate } from "react-router-dom"
 import { signInWithEmailAndPassword } from "firebase/auth"
+import "./Login.scss"
 
 const Login: FC = () => {
   const navigate = useNavigate()

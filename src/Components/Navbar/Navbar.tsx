@@ -1,22 +1,50 @@
-import React, { FC, useEffect, useState } from "react"
+import { FC, useEffect, useState } from "react"
 import { Link, useLocation } from "react-router-dom"
-import "./Navbar.scss"
 import { getNavbarTranslated, getPicturesLogo } from "../../firebaseApi"
 import { DocumentData } from "@firebase/firestore"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../../Redux/store"
 import { setLanguage } from "../../Redux/Slices/Languages"
-
+import "./Navbar.scss"
 import { MdEmail, MdRestaurant, MdOutlineSportsHandball } from "react-icons/md"
 import { FaImages } from "react-icons/fa"
 import { PiBowlFoodFill } from "react-icons/pi"
 import { FaBed } from "react-icons/fa6"
+import img from "20240408_125716.jpg"
 
 const Navbar: FC = () => {
   const location = useLocation()
   const [activeLink, setActiveLink] = useState("")
+  const [translationData, setTranslationData] = useState<DocumentData>()
+  const [isLoading, setIsLoading] = useState(true)
+  const [logoPictures, setLogoPictures] = useState<string[]>()
+  const [isNavigating, setIsNavigating] = useState(false)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true)
+      try {
+        const fetchedTranslation = await getNavbarTranslated()
+        const fetchedPictures = await getPicturesLogo()
+        setLogoPictures(fetchedPictures)
+        setTranslationData(fetchedTranslation)
+      } catch (error) {
+        console.error("Error fetching data:", error)
+        setIsLoading(false)
+      }
+    }
+
+    fetchData()
+  }, [])
+
   const handleLinkClick = (path: string) => {
-    setActiveLink(path)
+    if (!isNavigating) {
+      setIsNavigating(true)
+      setActiveLink(path)
+      setTimeout(() => {
+        setIsNavigating(false)
+      }, 500) // Adjust this delay as necessary for your animations
+    }
   }
 
   const dispatch = useDispatch()
@@ -33,24 +61,6 @@ const Navbar: FC = () => {
   const nemcina = () => {
     dispatch(setLanguage("de"))
   }
-
-  const [translationData, setTranslationData] = useState<DocumentData>()
-  const [isLoading, setIsLoading] = useState(true)
-  const [logoPictures, setLogoPictures] = useState<string[]>()
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true)
-
-      const fetchedTranslation = await getNavbarTranslated()
-      const fetchedPictures = await getPicturesLogo()
-      setLogoPictures(fetchedPictures)
-      setTranslationData(fetchedTranslation)
-      setIsLoading(false)
-    }
-
-    fetchData()
-  }, [])
 
   const SidebarData = [
     {
@@ -93,32 +103,32 @@ const Navbar: FC = () => {
 
   return (
     <div className='containerNavbar'>
-      <div className='navbar'>
-        <div className='top-section'>
+      <div>
+        <div className='topSection'>
           {logoPictures?.map((logoPicture, index) => {
             return (
               <>
                 <Link to='/' key={index}>
-                  <img src={logoPicture} alt='Logo' />
+                  <img src='20240408_125716' alt='Logo' />
                 </Link>
               </>
             )
           })}
         </div>
-        <ul className='nav-menu-items'>
+        <ul className='navMenuItems'>
           {SidebarData.map((item, index) => {
             return (
               <li
                 className={
                   location.pathname === item.path || activeLink === item.path
-                    ? "active-link nav-link"
-                    : "nav-link"
+                    ? "activeLink navLink"
+                    : "navLink"
                 }
                 key={index}
               >
                 <Link to={item.path} onClick={() => handleLinkClick(item.path)}>
                   {item.icon}
-                  <span className='menu-text'>{isLoading ? item.skeleton : item.title}</span>
+                  <span className='menuText'>{isLoading ? item.skeleton : item.title}</span>
                 </Link>
               </li>
             )

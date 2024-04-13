@@ -1,4 +1,16 @@
-.row {
+.oNasPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+
+  h1 {
+    text-align: center;
+    font-weight: 700;
+    font-size: 36px;
+  }
+}
+
+.oNasRow {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -10,7 +22,7 @@
   width: 50%;
 }
 
-.header {
+.oNasBody {
   display: flex;
   justify-content: center;
   text-align: center;
@@ -29,17 +41,7 @@
   margin: 10px auto;
 }
 
-.oNasPage {
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-
-  h1 {
-    text-align: center;
-    font-weight: 700;
-    font-size: 36px;
-  }
-}
+// Skeleton
 
 .mapSkeleton {
   width: 600px;

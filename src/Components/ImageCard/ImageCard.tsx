@@ -42,14 +42,14 @@ const ImageCard: FC<Props> = ({ id, pictures }) => {
 
   return (
     <>
-      <div className='imagecard-container' onClick={toggleModal}>
+      <div className='imagecardContainer' onClick={toggleModal}>
         <img className='imageCardImage' src={selectedPicture}></img>
       </div>
 
       {modal && (
         <div>
           <div className='overlay'>
-            <div className='modal-content' ref={modalRef}>
+            <div className='modalContent' ref={modalRef}>
               <ImageSliderPopup id={id} pictures={pictures} />
             </div>
           </div>

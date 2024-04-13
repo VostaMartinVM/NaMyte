@@ -1,12 +1,11 @@
-import React, { FC, useEffect, useState } from "react"
-import "./Ubytovani.scss"
+import { FC, useEffect, useState } from "react"
 import { getPicturesUbytovani, getUbytovaniPageMenuTranslated } from "../../firebaseApi"
 import ImageSlider from "../../Components/ImageSlider/ImageSlider"
 import { DocumentData } from "firebase/firestore"
 import { useSelector } from "react-redux"
 import { RootState } from "../../Redux/store"
 import { TbBrandBooking } from "react-icons/tb"
-import { url } from "inspector"
+import "./Ubytovani.scss"
 import AnimatedWrapper from "../../Components/AnimatedWrapper/AnimatedWrapper"
 
 const Ubytovani: FC = () => {
@@ -36,12 +35,12 @@ const Ubytovani: FC = () => {
 
   return (
     <AnimatedWrapper>
-      <div className='rooms'>
-        <div className='containerStyles'>
+      <div className='ubytovaniContainer'>
+        <div className='ubytovaniImgContainer'>
           <ImageSlider pictures={ubytovaniPictures} styling='roomImageSlider'></ImageSlider>
         </div>
-        <div className='homeHeader'>
-          <h1>Ubytovani</h1>
+        <div>
+          <h1> {translationData ? translationData?.translated_output.header1[lg] : "Ubytování"}</h1>
         </div>
         {isLoading ? (
           <div>

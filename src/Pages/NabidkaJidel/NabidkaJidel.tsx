@@ -107,7 +107,7 @@ const NabidkaJidel: FC = () => {
 
     const menuKeys = Object.keys(translationData.translated_output)
       .filter((key) => key.startsWith(headerValue))
-      .sort() // Sort menu keys alphabetically
+      .sort()
 
     return menuKeys.map((menuKey, index) => {
       const menuValue = translationData.translated_output[menuKey]

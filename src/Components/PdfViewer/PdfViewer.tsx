@@ -1,13 +1,18 @@
 import { FC } from "react"
 import { Document, Page } from "react-pdf/dist/esm/entry.webpack"
 import "./PdfViewer.scss"
-import fratna from "./Game.pdf"
 
-const PdfViewer: FC = () => {
+type PdfViewerProps = {
+  url: string
+}
+
+const PdfViewer: FC<PdfViewerProps> = ({ url }) => {
+  if (!url) return <div>Loading PDF...</div>
+
   return (
-    <div>
-      <Document file={fratna}>
-        <Page pageNumber={1} />
+    <div className='pdfContainer'>
+      <Document file={url}>
+        {url && <Page pageNumber={1} renderTextLayer={false} renderAnnotationLayer={false} />}
       </Document>
     </div>
   )

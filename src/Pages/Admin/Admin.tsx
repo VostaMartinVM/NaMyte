@@ -1,39 +1,86 @@
 import { ChangeEvent, FC, useRef, useState } from "react"
 import { auth } from "../../firebase"
 import { useNavigate } from "react-router-dom"
-import { uploadPdf } from "../../firebaseApi"
+import {
+  uploadPdfDenniMenu,
+  uploadPdfVikendoveMenu,
+  deleteDenniMenu,
+  deleteVikendoveMenu,
+} from "../../firebaseApi"
+
 import "./Admin.scss"
 
 const Admin: FC = () => {
   const navigate = useNavigate()
-  const inputFile = useRef<HTMLInputElement>(null)
-  const [uploadedFile, setUploadedFile] = useState<File>()
+  const inputDenniMenuFile = useRef<HTMLInputElement>(null)
+  const inputVikendoveMenuFile = useRef<HTMLInputElement>(null)
+  const [uploadedFileDM, setUploadedFileDM] = useState<File | null>(null)
+  const [uploadedFileVM, setUploadedFileVM] = useState<File | null>(null)
 
-  const handlePdfSubmit = () => {
-    inputFile.current?.click()
-  }
-
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeDM = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const file = event.target.files[0]
-      setUploadedFile(file)
+      setUploadedFileDM(file)
     }
   }
 
-  const upload = () => {
-    if (uploadedFile) {
-      uploadPdf(uploadedFile)
-      console.log(uploadedFile)
+  const onChangeVM = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      const file = event.target.files[0]
+      setUploadedFileVM(file)
+    }
+  }
+
+  const uploadDM = () => {
+    if (uploadedFileDM) {
+      deleteDenniMenu()
+      uploadPdfDenniMenu(uploadedFileDM)
+      console.log(uploadedFileDM)
+    }
+  }
+
+  const uploadVM = () => {
+    if (uploadedFileVM) {
+      deleteVikendoveMenu()
+      uploadPdfVikendoveMenu(uploadedFileVM)
+      console.log(uploadedFileVM)
     }
   }
 
   return (
-    <div>
-      <h1>Le Admin Page</h1>
-      <input type='file' ref={inputFile} onChange={onChange} />
-      <button onClick={handlePdfSubmit}>Open files</button>
-      <button onClick={upload}>Upload</button>
+    <div className='adminContainer'>
+      <div className='adminHeader'>
+        <h1>Denni menu</h1>
+      </div>
+
+      <div>
+        <input
+          type='file'
+          className='inputButton'
+          ref={inputDenniMenuFile}
+          onChange={onChangeDM}
+        ></input>
+        <button className='uploadButton' onClick={uploadDM}>
+          Upload
+        </button>
+      </div>
+      <div className='adminHeader'>
+        <h1>Vikendove menu</h1>
+      </div>
+
+      <div>
+        <input
+          type='file'
+          className='inputButton'
+          ref={inputVikendoveMenuFile}
+          onChange={onChangeVM}
+        ></input>
+        <button className='uploadButton' onClick={uploadVM}>
+          Upload
+        </button>
+      </div>
       <button
+        className='uploadButton'
         onClick={() => {
           auth.signOut()
           navigate("/Login")

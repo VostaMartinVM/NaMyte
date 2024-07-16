@@ -1,4 +1,3 @@
-import { useState } from "react"
 import Navbar from "./Components/Navbar/Navbar"
 import { Route, Routes, useLocation } from "react-router-dom"
 import { Provider } from "react-redux"
@@ -19,16 +18,16 @@ import AuthRoute from "./Auth"
 import { AnimatePresence } from "framer-motion"
 
 const App = () => {
-  const [language, setLanguage] = useState<string>()
   const persistor = persistStore(store)
   const location = useLocation()
+  const isSpecialPage = location.pathname === "/Login" || location.pathname === "/Admin"
 
   return (
     <>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <div className='siteBackground'>
-            <Navbar />
+            {!isSpecialPage && <Navbar />}
             <AnimatePresence mode='wait'>
               <Routes key={location.pathname} location={location}>
                 <Route path='Login' element={<Login />} />

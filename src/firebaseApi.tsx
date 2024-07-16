@@ -1,6 +1,6 @@
 import { getDoc, doc } from "firebase/firestore"
 import { db, storage } from "./firebase"
-import { getDownloadURL, listAll, ref, uploadBytesResumable } from "firebase/storage"
+import { deleteObject, getDownloadURL, listAll, ref, uploadBytesResumable } from "firebase/storage"
 
 // GET TRANSLATED DATA
 
@@ -132,7 +132,42 @@ export const getPicturesAktivity = async () => {
 
 // Upload pdf
 
-export const uploadPdf = (pdf: File) => {
-  const pdfRef = ref(storage, `JidelniListek/${pdf.name}`)
+export const uploadPdfDenniMenu = (pdf: File) => {
+  const pdfRef = ref(storage, `DenniMenu/${pdf.name}`)
   uploadBytesResumable(pdfRef, pdf)
+}
+
+export const uploadPdfVikendoveMenu = (pdf: File) => {
+  const pdfRef = ref(storage, `VikendoveMenu/${pdf.name}`)
+  uploadBytesResumable(pdfRef, pdf)
+}
+
+// Delete pdf
+
+export const deleteDenniMenu = async () => {
+  const StorageRef = ref(storage, "DenniMenu/")
+  const refs = await listAll(StorageRef)
+
+  const deletePromises = refs.items.map((itemRef) => deleteObject(itemRef))
+
+  try {
+    await Promise.all(deletePromises)
+    console.log("All files in folder DenniMenu have been deleted.")
+  } catch (error) {
+    console.error("Error deleting files:", error)
+  }
+}
+
+export const deleteVikendoveMenu = async () => {
+  const StorageRef = ref(storage, "VikendoveMenu/")
+  const refs = await listAll(StorageRef)
+
+  const deletePromises = refs.items.map((itemRef) => deleteObject(itemRef))
+
+  try {
+    await Promise.all(deletePromises)
+    console.log("All files in folder DenniMenu have been deleted.")
+  } catch (error) {
+    console.error("Error deleting files:", error)
+  }
 }
